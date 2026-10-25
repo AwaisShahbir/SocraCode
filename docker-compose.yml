@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: socracode-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - SOCRA_HOST=0.0.0.0
+      - SOCRA_PORT=8000
+      - SOCRA_ENV=production
+      - RUNNER_TYPE=local
+    volumes:
+      - ./backend:/app
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: socracode-web
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    restart: unless-stopped
