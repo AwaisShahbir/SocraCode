@@ -1,0 +1,113 @@
+/* SocraCode Design System Tokens (Section 9.2) */
+
+:root {
+  /* Light Theme (Default) */
+  --color-bg: #F7F8FA;
+  --color-surface: #FFFFFF;
+  --color-surface-raised: #FFFFFF;
+  --color-border: #D5D9E0;
+  --color-text: #14181F;
+  --color-text-muted: #4A5260;
+  --color-accent: #2B5FD9;
+  --color-on-accent: #FFFFFF;
+  --color-success: #1F7A4D;
+  --color-warning: #8A5A00;
+  --color-danger: #B3261E;
+  --color-focus-ring: #2B5FD9;
+  --color-code-bg: #F1F3F7;
+
+  /* Typography */
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
+
+  /* Type Scale */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 32px;
+
+  /* Spacing (4px base grid) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+
+  /* Radii (Section 9.2: two sizes only) */
+  --radius-control: 6px;
+  --radius-container: 10px;
+
+  /* Elevation */
+  --shadow-floating: 0 4px 16px rgba(0, 0, 0, 0.08);
+
+  /* Transitions */
+  --transition-fast: 150ms ease-out;
+}
+
+[data-theme="dark"] {
+  --color-bg: #0F1319;
+  --color-surface: #171C24;
+  --color-surface-raised: #1E2530;
+  --color-border: #2E3644;
+  --color-text: #E8ECF2;
+  --color-text-muted: #A3ACBB;
+  --color-accent: #7AA2FF;
+  --color-on-accent: #0F1319;
+  --color-success: #5BD08F;
+  --color-warning: #F0B955;
+  --color-danger: #FF8A80;
+  --color-focus-ring: #9DBBFF;
+  --color-code-bg: #13171F;
+  --shadow-floating: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Global Reset and Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Accessible Focus Styling */
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Form controls reset */
+button, select, input {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+button {
+  cursor: pointer;
+}
