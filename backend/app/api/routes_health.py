@@ -21,5 +21,5 @@ def get_health() -> HealthResponse:
         status="healthy",
         version="0.1.0",
         runner=settings.runner_type,
-        languages_supported=["python"],
+        languages_supported=["python", "java", "cpp"],
     )

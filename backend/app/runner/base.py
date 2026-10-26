@@ -25,3 +25,23 @@ class CodeRunner(ABC):
     ) -> RunResult:
         """Execute a Python snippet and capture its output."""
         pass
+
+    @abstractmethod
+    def run_java(
+        self,
+        code: str,
+        stdin: Optional[str] = None,
+        timeout_seconds: Optional[float] = None,
+    ) -> RunResult:
+        """Compile and execute a Java program and capture its output."""
+        pass
+
+    @abstractmethod
+    def run_cpp(
+        self,
+        code: str,
+        stdin: Optional[str] = None,
+        timeout_seconds: Optional[float] = None,
+    ) -> RunResult:
+        """Compile and execute a C++ program and capture its output."""
+        pass
