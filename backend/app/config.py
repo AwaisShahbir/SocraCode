@@ -28,5 +28,11 @@ class Settings:
     runner_timeout_seconds: float = float(os.getenv("RUNNER_TIMEOUT_SECONDS", "5.0"))
     runner_max_output_bytes: int = int(os.getenv("RUNNER_MAX_OUTPUT_BYTES", "65536"))
 
+    # Database settings
+    db_path: str = os.getenv(
+        "SOCRA_DB_PATH",
+        os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "socracode.db"),
+    )
+
 
 settings = Settings()
