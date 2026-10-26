@@ -3,6 +3,23 @@
 All notable changes to SocraCode will be documented in this file.
 The format is based on Keep a Changelog.
 
+## [Step 3] - Weeks 6-7: Full Ladder & Classifier - 2026-10-26
+
+### Added
+- Feature extraction pipeline (`backend/app/ml/features.py`) extracting token n-grams and AST syntax characteristics without pretrained embeddings.
+- Scratch-trained PyTorch multi-layer perceptron neural network (`backend/app/ml/model.py`) for bug category classification.
+- Baseline Scikit-learn Random Forest classifier with comparative metrics (`backend/app/ml/baseline.py`).
+- Standalone offline training pipeline (`ml/scripts/train.py`) with held-out validation and metrics export (`ml/data/generated/model_metrics.json`).
+- Production ML classifier inference service (`backend/app/ml/classifier.py`) with confidence threshold fallback to expert rule engine.
+- Parallel worked examples catalog (`backend/app/retrieval/examples_library.py`) covering all 8 bug categories.
+- Level 4 TF-IDF cosine similarity example retriever (`backend/app/retrieval/tfidf_matcher.py`) matching student buggy code to parallel worked problems.
+- Level 5 deterministic rule-based fix synthesizer (`backend/app/rules/fixer.py`) with AST syntax validation, diff generation, and pedagogical explanations.
+- Extended Level Gate (`backend/app/hints/level_gate.py`) supporting full 5-level ladder (Level 4: Worked Example; Level 5: Solution + Explanation).
+- Frontend confirmation modal for Level 5 ("Show Full Solution? Keep Trying vs Show Solution") per Section 9.4.
+- Frontend Level 4 code block display and Level 5 fix viewer with "Apply Fix to Editor" and copy actions.
+- 31 backend unit and integration tests passing (`test_runner`, `test_api`, `test_parser`, `test_rules`, `test_hints`, `test_leak_check`, `test_attempts_api`, `test_retrieval`, `test_fixer`, `test_classifier`).
+- End-to-end browser subagent verification of the complete 5-level ladder, fix application, execution, and reflection flow.
+
 ## [Step 2] - Weeks 3-5: Python Engine & Core Hints (Levels 1 to 3) - 2026-10-26
 
 ### Added
