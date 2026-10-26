@@ -25,7 +25,12 @@ class RuleBasedFixer:
         category: BugCategory,
         buggy_line: int,
         context: Dict[str, Any],
+        language: str = "python",
     ) -> FixResult:
+        norm = language.lower().strip()
+        if norm in ("java", "cpp", "c++"):
+            return self._fix_c_family(code, category, buggy_line, context, norm)
+
         if category == BugCategory.SYNTAX_ERROR:
             return self._fix_syntax_error(code, buggy_line, context)
         elif category == BugCategory.UNDEFINED_NAME:
@@ -34,6 +39,72 @@ class RuleBasedFixer:
             return self._fix_missing_return(code, buggy_line, context)
         elif category == BugCategory.INDEX_OUT_OF_RANGE:
             return self._fix_index_bounds(code, buggy_line, context)
+
+        return FixResult(
+            can_fix=False,
+            fixed_code=None,
+            explanation="SocraCode can't verify a full fix for this bug with certainty. Review the worked example in Level 4 or ask your instructor.",
+        )
+
+    def _fix_c_family(
+        self,
+        code: str,
+        category: BugCategory,
+        buggy_line: int,
+        context: Dict[str, Any],
+        language: str,
+    ) -> FixResult:
+        lang_title = "Java" if language == "java" else "C++"
+        lines = code.splitlines()
+        target_idx = buggy_line - 1
+
+        if not (0 <= target_idx < len(lines)):
+            return FixResult(can_fix=False, explanation="Invalid line index.")
+
+        if category == BugCategory.SYNTAX_ERROR:
+            orig_line = lines[target_idx]
+            stripped = orig_line.strip()
+            # If line doesn't end with semicolon and is not a brace or empty
+            if stripped and not stripped.endswith(";") and not stripped.endswith("{") and not stripped.endswith("}"):
+                candidate_line = orig_line.rstrip() + ";"
+                lines[target_idx] = candidate_line
+                candidate_code = "\n".join(lines)
+                return FixResult(
+                    can_fix=True,
+                    fixed_code=candidate_code,
+                    explanation=f"Added missing semicolon (;) at line {buggy_line}. In {lang_title}, every statement must be terminated with a semicolon.",
+                    diff_summary=f"Line {buggy_line}: '{orig_line.strip()}' -> '{candidate_line.strip()}'",
+                )
+            # Check previous line if compiler flagged next line
+            elif target_idx > 0:
+                prev_line = lines[target_idx - 1]
+                prev_strip = prev_line.strip()
+                if prev_strip and not prev_strip.endswith(";") and not prev_strip.endswith("{") and not prev_strip.endswith("}"):
+                    candidate_prev = prev_line.rstrip() + ";"
+                    lines[target_idx - 1] = candidate_prev
+                    candidate_code = "\n".join(lines)
+                    return FixResult(
+                        can_fix=True,
+                        fixed_code=candidate_code,
+                        explanation=f"Added missing semicolon (;) at line {buggy_line - 1}. In {lang_title}, statements preceding line {buggy_line} must end with a semicolon.",
+                        diff_summary=f"Line {buggy_line - 1}: '{prev_line.strip()}' -> '{candidate_prev.strip()}'",
+                    )
+
+        elif category == BugCategory.UNDEFINED_NAME:
+            undefined_name = context.get("undefined_name")
+            suggested_name = context.get("suggested_name")
+            if undefined_name and suggested_name:
+                orig_line = lines[target_idx]
+                fixed_line = re.sub(rf"\b{re.escape(undefined_name)}\b", suggested_name, orig_line)
+                if fixed_line != orig_line:
+                    lines[target_idx] = fixed_line
+                    candidate_code = "\n".join(lines)
+                    return FixResult(
+                        can_fix=True,
+                        fixed_code=candidate_code,
+                        explanation=f"Corrected identifier typo '{undefined_name}' to '{suggested_name}' on line {buggy_line} in {lang_title}.",
+                        diff_summary=f"Line {buggy_line}: '{orig_line.strip()}' -> '{fixed_line.strip()}'",
+                    )
 
         return FixResult(
             can_fix=False,
