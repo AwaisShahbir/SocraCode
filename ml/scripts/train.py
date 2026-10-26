@@ -22,14 +22,24 @@ if BACKEND_DIR not in sys.path:
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from app.categories import BugCategory
-from app.ml.features import CodeFeatureExtractor
-from app.ml.model import BugClassifierNN
-from app.ml.baseline import (
-    CATEGORY_INDEX_MAP,
-    ScikitLearnBaseline,
-    evaluate_model_performance,
-)
+try:
+    from app.categories import BugCategory
+    from app.ml.features import CodeFeatureExtractor
+    from app.ml.model import BugClassifierNN
+    from app.ml.baseline import (
+        CATEGORY_INDEX_MAP,
+        ScikitLearnBaseline,
+        evaluate_model_performance,
+    )
+except ImportError:
+    from backend.app.categories import BugCategory  # type: ignore
+    from backend.app.ml.features import CodeFeatureExtractor  # type: ignore
+    from backend.app.ml.model import BugClassifierNN  # type: ignore
+    from backend.app.ml.baseline import (  # type: ignore
+        CATEGORY_INDEX_MAP,
+        ScikitLearnBaseline,
+        evaluate_model_performance,
+    )
 from ml.scripts.generate_bugs import BugInjector
 
 
@@ -119,7 +129,10 @@ def train_and_evaluate():
     num_classes = len(BugCategory)
     nn_model = BugClassifierNN(input_dim=input_dim, num_classes=num_classes)
 
-    train_dataset = TensorDataset(torch.tensor(X_train), torch.tensor(y_train))
+    train_dataset = TensorDataset(
+        torch.tensor(X_train, dtype=torch.float32),
+        torch.tensor(y_train, dtype=torch.long),
+    )
     train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
 
     optimizer = torch.optim.Adam(nn_model.parameters(), lr=0.005)
@@ -139,7 +152,7 @@ def train_and_evaluate():
     # PyTorch evaluation
     nn_model.eval()
     with torch.no_grad():
-        test_logits = nn_model(torch.tensor(X_test))
+        test_logits = nn_model(torch.tensor(X_test, dtype=torch.float32))
         y_pred_nn = torch.argmax(test_logits, dim=-1).numpy()
 
     nn_metrics = evaluate_model_performance(y_test, y_pred_nn, model_name="PyTorch NN (From Scratch)")
@@ -157,10 +170,19 @@ def train_and_evaluate():
     print("=" * 60)
     print(f"{'Metric':<20} | {'PyTorch NN':<16} | {'Baseline (RF)':<16}")
     print("-" * 60)
-    print(f"{'Accuracy':<20} | {nn_metrics['accuracy'] * 100:.2f}%{'':<9} | {baseline_metrics['accuracy'] * 100:.2f}%")
-    print(f"{'Macro Precision':<20} | {nn_metrics['macro_precision'] * 100:.2f}%{'':<9} | {baseline_metrics['macro_precision'] * 100:.2f}%")
-    print(f"{'Macro Recall':<20} | {nn_metrics['macro_recall'] * 100:.2f}%{'':<9} | {baseline_metrics['macro_recall'] * 100:.2f}%")
-    print(f"{'Macro F1-Score':<20} | {nn_metrics['macro_f1'] * 100:.2f}%{'':<9} | {baseline_metrics['macro_f1'] * 100:.2f}%")
+    nn_acc = float(nn_metrics["accuracy"]) * 100
+    base_acc = float(baseline_metrics["accuracy"]) * 100
+    nn_prec = float(nn_metrics["macro_precision"]) * 100
+    base_prec = float(baseline_metrics["macro_precision"]) * 100
+    nn_rec = float(nn_metrics["macro_recall"]) * 100
+    base_rec = float(baseline_metrics["macro_recall"]) * 100
+    nn_f1 = float(nn_metrics["macro_f1"]) * 100
+    base_f1 = float(baseline_metrics["macro_f1"]) * 100
+
+    print(f"{'Accuracy':<20} | {nn_acc:.2f}%{'':<9} | {base_acc:.2f}%")
+    print(f"{'Macro Precision':<20} | {nn_prec:.2f}%{'':<9} | {base_prec:.2f}%")
+    print(f"{'Macro Recall':<20} | {nn_rec:.2f}%{'':<9} | {base_rec:.2f}%")
+    print(f"{'Macro F1-Score':<20} | {nn_f1:.2f}%{'':<9} | {base_f1:.2f}%")
     print("=" * 60)
 
     # 6. Save Artifacts for production backend

@@ -25,13 +25,15 @@ class MLClassifierService:
     def load_if_available(self) -> bool:
         if os.path.exists(MODEL_WEIGHTS_PATH) and os.path.exists(VECTORIZER_PATH):
             try:
-                self.feature_extractor = joblib.load(VECTORIZER_PATH)
-                dummy_feat = self.feature_extractor.extract_single("x = 1", "", "")
+                extractor: CodeFeatureExtractor = joblib.load(VECTORIZER_PATH)
+                self.feature_extractor = extractor
+                dummy_feat = extractor.extract_single("x = 1", "", "")
                 input_dim = len(dummy_feat)
 
-                self.model = BugClassifierNN(input_dim=input_dim, num_classes=len(BugCategory))
-                self.model.load_state_dict(torch.load(MODEL_WEIGHTS_PATH, map_location=torch.device("cpu")))
-                self.model.eval()
+                model = BugClassifierNN(input_dim=input_dim, num_classes=len(BugCategory))
+                model.load_state_dict(torch.load(MODEL_WEIGHTS_PATH, map_location=torch.device("cpu"), weights_only=True))
+                model.eval()
+                self.model = model
                 self.is_loaded = True
                 return True
             except Exception as e:

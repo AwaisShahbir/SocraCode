@@ -44,6 +44,7 @@ class LocalSubprocessRunner(CodeRunner):
             # Use current python executable with isolated environment flags (-I, -u)
             cmd = [sys.executable, "-I", "-u", script_path]
 
+            proc: Optional[subprocess.Popen[bytes]] = None
             try:
                 proc = subprocess.Popen(
                     cmd,
@@ -90,7 +91,8 @@ class LocalSubprocessRunner(CodeRunner):
 
             except subprocess.TimeoutExpired:
                 # Force kill process tree
-                self._terminate_process(proc)
+                if proc is not None:
+                    self._terminate_process(proc)
                 duration_ms = round((time.perf_counter() - start_time) * 1000, 2)
                 return RunResult(
                     stdout="",

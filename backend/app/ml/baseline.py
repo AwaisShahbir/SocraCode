@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Dict, List, Tuple
+from typing import Any, Dict, List, Tuple, Union
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support, confusion_matrix
 from app.categories import BugCategory
@@ -21,17 +21,17 @@ class ScikitLearnBaseline:
     def predict(self, X: np.ndarray) -> np.ndarray:
         return self.model.predict(X)
 
-    def predict_proba(self, X: np.ndarray) -> np.ndarray:
+    def predict_proba(self, X: np.ndarray) -> Any:
         return self.model.predict_proba(X)
 
 
 def evaluate_model_performance(
-    y_true: np.ndarray, y_pred: np.ndarray, model_name: str = "Model"
-) -> Dict[str, object]:
+    y_true: Any, y_pred: Any, model_name: str = "Model"
+) -> Dict[str, Any]:
     """Generates evaluation metrics: accuracy, precision, recall, and confusion matrix."""
     acc = accuracy_score(y_true, y_pred)
     prec, rec, f1, _ = precision_recall_fscore_support(
-        y_true, y_pred, average="macro", zero_division=0
+        y_true, y_pred, average="macro", zero_division=0.0  # type: ignore[arg-type]
     )
     cm = confusion_matrix(y_true, y_pred, labels=list(range(len(BugCategory))))
 

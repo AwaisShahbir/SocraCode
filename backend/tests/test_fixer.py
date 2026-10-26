@@ -25,6 +25,7 @@ def test_fix_undefined_name_typo():
         context={"undefined_name": "contuer", "suggested_name": "counter"},
     )
     assert res.can_fix is True
+    assert res.fixed_code is not None
     assert "print(counter)" in res.fixed_code
     ast.parse(res.fixed_code)
 

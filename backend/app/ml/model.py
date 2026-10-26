@@ -31,4 +31,4 @@ class BugClassifierNN(nn.Module):
             logits = self.forward(x)
             probabilities = torch.softmax(logits, dim=-1)
             confidence, class_idx = torch.max(probabilities, dim=-1)
-            return class_idx.item(), round(confidence.item(), 4)
+            return int(class_idx.item()), float(round(float(confidence.item()), 4))
