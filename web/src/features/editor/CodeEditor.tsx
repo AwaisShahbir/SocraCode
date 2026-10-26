@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import Editor from '@monaco-editor/react';
 import type { OnMount } from '@monaco-editor/react';
 
@@ -8,6 +8,7 @@ interface CodeEditorProps {
   resolvedTheme: 'light' | 'dark';
   onRunShortcut?: () => void;
   isRunning?: boolean;
+  highlightedLine?: number | null;
 }
 
 export const CodeEditor: React.FC<CodeEditorProps> = ({
@@ -16,6 +17,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
   resolvedTheme,
   onRunShortcut,
   isRunning = false,
+  highlightedLine = null,
 }) => {
   const editorRef = useRef<any>(null);
 
@@ -37,6 +39,14 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
       }
     });
   };
+
+  useEffect(() => {
+    if (editorRef.current && highlightedLine) {
+      editorRef.current.revealLineInCenter(highlightedLine);
+      editorRef.current.setPosition({ lineNumber: highlightedLine, column: 1 });
+      editorRef.current.focus();
+    }
+  }, [highlightedLine]);
 
   const lineCount = code.split('\n').length;
 
@@ -64,7 +74,22 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
           color: 'var(--color-text-muted)',
         }}
       >
-        <span style={{ fontWeight: 600 }}>main.py</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+          <span style={{ fontWeight: 600 }}>main.py</span>
+          {highlightedLine && (
+            <span
+              style={{
+                backgroundColor: 'rgba(240, 185, 85, 0.2)',
+                color: 'var(--color-warning)',
+                padding: '1px 6px',
+                borderRadius: '4px',
+                fontWeight: 600,
+              }}
+            >
+              Inspecting Line {highlightedLine}
+            </span>
+          )}
+        </div>
         <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
           <span>{lineCount} lines</span>
           <span>Saved just now</span>
