@@ -10,3 +10,6 @@ Format: `YYYY-MM-DD | Decision | Reason`
 - 2026-10-25 | Monaco Editor with lazy-loading and dynamic theme binding | Provides industry-standard code editing experience matching VS Code, syncing with the SocraCode design tokens.
 - 2026-10-25 | Standardized 8 canonical bug categories in `backend/app/categories.py` | Guarantees consistency between backend diagnosis, hint templates, and dashboard concept tracking across all supported languages.
 - 2026-10-25 | Synthetic AST and regex bug injection over clean algorithm seed corpus | Fulfills non-negotiable constraint of zero pre-trained weights by establishing a self-sufficient training pipeline.
+- 2026-10-26 | Backend Level Gate with SQLite attempt tracking | Enforces non-negotiable constraint 4: clients cannot jump levels, and attempts are persisted with sequential unlocking.
+- 2026-10-26 | Hybrid syntax parsing using ast.parse and regex traceback extraction | Provides exact line and column numbers for syntax errors while robustly extracting deepest user frame for runtime exceptions.
+- 2026-10-26 | Strict template leak check preventing code fixes in Levels 1 to 3 | Guarantees non-negotiable constraint 3 and proposal evaluation criteria: levels 1–3 contain zero code solutions.
