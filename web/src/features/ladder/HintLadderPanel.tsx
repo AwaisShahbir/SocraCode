@@ -15,6 +15,8 @@ import {
   Copy,
   ArrowRight,
   AlertCircle,
+  Zap,
+  ShieldAlert,
 } from 'lucide-react';
 import type { UnlockedHint } from '../../types/runner';
 
@@ -45,13 +47,14 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
   const [feedbackSent, setFeedbackSent] = useState<Record<string, boolean>>({});
   const [showConfirmLevel5, setShowConfirmLevel5] = useState<boolean>(false);
   const [copiedLevel5, setCopiedLevel5] = useState<boolean>(false);
+  const [copiedExample, setCopiedExample] = useState<boolean>(false);
 
   const ladderDefinitions = [
-    { level: 1, title: 'Nudge', subtitle: 'Guiding question', icon: HelpCircle },
-    { level: 2, title: 'Concept', subtitle: 'Underlying CS concept', icon: Sparkles },
-    { level: 3, title: 'Location', subtitle: 'Problem line & area', icon: MapPin },
-    { level: 4, title: 'Similar Example', subtitle: 'Worked parallel code', icon: Code2 },
-    { level: 5, title: 'Full Solution', subtitle: 'Complete verified fix', icon: CheckSquare },
+    { level: 1, title: 'Nudge', subtitle: 'Socratic inquiry', icon: HelpCircle, color: '#38BDF8' },
+    { level: 2, title: 'Concept', subtitle: 'Underlying CS theory', icon: Sparkles, color: '#818CF8' },
+    { level: 3, title: 'Location', subtitle: 'Target problem line', icon: MapPin, color: '#FBBF24' },
+    { level: 4, title: 'Parallel Example', subtitle: 'Worked problem', icon: Code2, color: '#C084FC' },
+    { level: 5, title: 'Full Solution', subtitle: 'Rule-verified fix', icon: CheckSquare, color: '#34D399' },
   ];
 
   const toggleExpand = (level: number) => {
@@ -68,7 +71,6 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
 
   const handlePrimaryAction = () => {
     if (currentLevel === 4) {
-      // Trigger confirmation dialog before showing full solution
       setShowConfirmLevel5(true);
     } else {
       onGetNextHint();
@@ -93,55 +95,70 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
         overflowY: 'auto',
       }}
     >
-      {/* Header */}
+      {/* Header & Stepper Progress Tracker */}
       <div
         style={{
           padding: 'var(--space-3) var(--space-4)',
           backgroundColor: 'var(--color-surface-raised)',
           borderBottom: '1px solid var(--color-border)',
+          flexShrink: 0,
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <h2 style={{ fontSize: 'var(--font-size-sm)', fontWeight: 700, letterSpacing: '-0.2px' }}>
-            Five-Level Hint Ladder
-          </h2>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <Zap size={16} color="var(--color-accent)" />
+            <h2 style={{ fontSize: '14px', fontWeight: 800, letterSpacing: '-0.3px', margin: 0 }}>
+              Socratic Hint Ladder
+            </h2>
+          </div>
           <span
             style={{
-              fontSize: 'var(--font-size-xs)',
-              color: 'var(--color-text-muted)',
-              backgroundColor: 'var(--color-code-bg)',
+              fontSize: '11px',
+              fontWeight: 700,
+              color: 'var(--color-accent)',
+              backgroundColor: 'rgba(99, 102, 241, 0.12)',
+              border: '1px solid rgba(99, 102, 241, 0.25)',
               padding: '2px 8px',
-              borderRadius: 'var(--radius-control)',
+              borderRadius: 'var(--radius-pill)',
             }}
           >
             Level {currentLevel} of {maxLevelAllowed}
           </span>
         </div>
-        <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginTop: '2px' }}>
-          Socratic guidance from guiding question to verified solution.
-        </p>
+
+        {/* Stepper Timeline Pills */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '4px', marginTop: '6px' }}>
+          {ladderDefinitions.map((step) => {
+            const isUnlocked = step.level <= currentLevel;
+            const isCurrent = step.level === currentLevel;
+            return (
+              <div
+                key={step.level}
+                title={`Level ${step.level}: ${step.title}`}
+                style={{
+                  flex: 1,
+                  height: '4px',
+                  borderRadius: '2px',
+                  backgroundColor: isCurrent
+                    ? 'var(--color-accent)'
+                    : isUnlocked
+                    ? 'var(--color-success)'
+                    : 'var(--color-border)',
+                  boxShadow: isCurrent ? '0 0 8px var(--color-accent)' : 'none',
+                  transition: 'all 0.3s ease',
+                }}
+              />
+            );
+          })}
+        </div>
       </div>
 
       {/* Screen Reader Live Announcement */}
-      <div
-        aria-live="polite"
-        style={{
-          position: 'absolute',
-          width: '1px',
-          height: '1px',
-          margin: '-1px',
-          overflow: 'hidden',
-          clip: 'rect(0,0,0,0)',
-        }}
-      >
-        {unlockedHints.length > 0
-          ? `Hint Level ${unlockedHints[unlockedHints.length - 1].level} unlocked: ${
-              unlockedHints[unlockedHints.length - 1].text
-            }`
-          : ''}
+      <div aria-live="polite" style={{ position: 'absolute', width: '1px', height: '1px', overflow: 'hidden', clip: 'rect(0,0,0,0)' }}>
+        {unlockedHints.length > 0 ? `Hint Level ${unlockedHints[unlockedHints.length - 1].level} unlocked` : ''}
       </div>
 
-      {/* Stepper Items */}
+      {/* Stepper Cards */}
       <div
         style={{
           display: 'flex',
@@ -169,11 +186,12 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
                   ? '1px solid var(--color-border)'
                   : '1px dashed var(--color-border)',
                 backgroundColor: isCurrent
-                  ? 'var(--color-surface)'
+                  ? 'var(--color-surface-card)'
                   : isUnlocked
                   ? 'var(--color-surface-raised)'
-                  : 'var(--color-code-bg)',
-                opacity: isUnlocked ? 1 : 0.65,
+                  : 'rgba(0, 0, 0, 0.02)',
+                boxShadow: isCurrent ? '0 4px 16px rgba(99, 102, 241, 0.12)' : 'none',
+                opacity: isUnlocked ? 1 : 0.6,
                 transition: 'all var(--transition-fast)',
                 overflow: 'hidden',
               }}
@@ -188,29 +206,34 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   width: '100%',
-                  padding: 'var(--space-2) var(--space-3)',
+                  padding: '10px 12px',
                   background: 'transparent',
                   border: 'none',
                   textAlign: 'left',
                   cursor: isUnlocked ? 'pointer' : 'default',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <div
                     style={{
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      width: '24px',
-                      height: '24px',
-                      borderRadius: '50%',
+                      width: '26px',
+                      height: '26px',
+                      borderRadius: '8px',
                       backgroundColor: isCurrent
                         ? 'var(--color-accent)'
                         : isUnlocked
+                        ? 'rgba(16, 185, 129, 0.15)'
+                        : 'var(--color-surface-raised)',
+                      color: isCurrent
+                        ? '#FFFFFF'
+                        : isUnlocked
                         ? 'var(--color-success)'
-                        : 'var(--color-border)',
-                      color: isUnlocked ? 'var(--color-on-accent)' : 'var(--color-text-muted)',
-                      fontSize: 'var(--font-size-xs)',
+                        : 'var(--color-text-muted)',
+                      border: isUnlocked ? 'none' : '1px solid var(--color-border)',
+                      fontSize: '12px',
                       fontWeight: 700,
                     }}
                   >
@@ -218,19 +241,18 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
                   </div>
 
                   <div>
-                    <span
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '4px',
-                        fontSize: 'var(--font-size-xs)',
-                        fontWeight: 600,
-                        color: isCurrent ? 'var(--color-accent)' : 'var(--color-text)',
-                      }}
-                    >
-                      <Icon size={13} />
-                      <span>Level {step.level}: {step.title}</span>
-                    </span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <Icon size={14} color={isCurrent ? 'var(--color-accent)' : step.color} />
+                      <span
+                        style={{
+                          fontSize: '13px',
+                          fontWeight: 700,
+                          color: isCurrent ? 'var(--color-accent)' : 'var(--color-text)',
+                        }}
+                      >
+                        L{step.level}: {step.title}
+                      </span>
+                    </div>
                     <div style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>
                       {step.subtitle}
                     </div>
@@ -251,7 +273,7 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
                       }}
                     >
                       <Lock size={12} />
-                      <span>Unlocks after L{step.level - 1}</span>
+                      <span>Locked</span>
                     </div>
                   )}
                 </div>
@@ -261,7 +283,7 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
               {isUnlocked && isExpanded && hint && (
                 <div
                   style={{
-                    padding: 'var(--space-3)',
+                    padding: '12px 14px',
                     borderTop: '1px solid var(--color-border)',
                     backgroundColor: 'var(--color-surface)',
                   }}
@@ -270,9 +292,10 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
                   {step.level <= 3 && (
                     <p
                       style={{
-                        fontSize: 'var(--font-size-sm)',
-                        lineHeight: '1.5',
+                        fontSize: '13.5px',
+                        lineHeight: '1.6',
                         color: 'var(--color-text)',
+                        margin: 0,
                       }}
                     >
                       {hint.text}
@@ -290,50 +313,77 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
                         }
                       }}
                       style={{
-                        marginTop: 'var(--space-2)',
+                        marginTop: '10px',
                         display: 'inline-flex',
                         alignItems: 'center',
-                        gap: '4px',
-                        padding: '4px 8px',
-                        fontSize: 'var(--font-size-xs)',
-                        fontWeight: 600,
-                        color: 'var(--color-accent)',
-                        backgroundColor: 'var(--color-code-bg)',
-                        border: '1px solid var(--color-border)',
+                        gap: '5px',
+                        padding: '5px 10px',
+                        fontSize: '12px',
+                        fontWeight: 700,
+                        color: 'var(--color-warning)',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        border: '1px solid rgba(245, 158, 11, 0.3)',
                         borderRadius: 'var(--radius-control)',
                         cursor: 'pointer',
                       }}
                     >
-                      <MapPin size={12} />
-                      <span>Highlight line in editor</span>
+                      <MapPin size={13} />
+                      <span>Inspect line in Monaco Editor</span>
                     </button>
                   )}
 
                   {/* Level 4: Worked Example Code Block */}
                   {step.level === 4 && (
                     <div>
-                      <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text)', marginBottom: 'var(--space-2)' }}>
+                      <p style={{ fontSize: '12px', color: 'var(--color-text)', marginBottom: '8px' }}>
                         Here is a parallel worked example demonstrating the correct pattern on different data:
                       </p>
                       {hint.example_code && (
-                        <pre
-                          style={{
-                            padding: 'var(--space-3)',
-                            backgroundColor: 'var(--color-code-bg)',
-                            color: 'var(--color-text)',
-                            fontFamily: 'var(--font-mono)',
-                            fontSize: 'var(--font-size-xs)',
-                            borderRadius: 'var(--radius-control)',
-                            border: '1px solid var(--color-border)',
-                            overflowX: 'auto',
-                            lineHeight: '1.4',
-                          }}
-                        >
-                          <code>{hint.example_code}</code>
-                        </pre>
+                        <div style={{ position: 'relative' }}>
+                          <pre
+                            style={{
+                              padding: '12px',
+                              backgroundColor: 'var(--color-code-bg)',
+                              color: 'var(--color-text)',
+                              fontFamily: 'var(--font-mono)',
+                              fontSize: '12px',
+                              borderRadius: 'var(--radius-control)',
+                              border: '1px solid var(--color-border)',
+                              overflowX: 'auto',
+                              lineHeight: '1.5',
+                            }}
+                          >
+                            <code>{hint.example_code}</code>
+                          </pre>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              navigator.clipboard.writeText(hint.example_code!);
+                              setCopiedExample(true);
+                              setTimeout(() => setCopiedExample(false), 1500);
+                            }}
+                            style={{
+                              position: 'absolute',
+                              top: '6px',
+                              right: '6px',
+                              padding: '3px 8px',
+                              background: 'var(--color-surface)',
+                              border: '1px solid var(--color-border)',
+                              borderRadius: '4px',
+                              fontSize: '11px',
+                              color: copiedExample ? 'var(--color-success)' : 'var(--color-text-muted)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                            }}
+                          >
+                            {copiedExample ? <Check size={11} /> : <Copy size={11} />}
+                            <span>{copiedExample ? 'Copied' : 'Copy'}</span>
+                          </button>
+                        </div>
                       )}
                       {hint.explanation && (
-                        <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginTop: 'var(--space-2)' }}>
+                        <p style={{ fontSize: '12px', color: 'var(--color-text-muted)', marginTop: '8px' }}>
                           <strong>Pattern Note:</strong> {hint.explanation}
                         </p>
                       )}
@@ -350,14 +400,15 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
                               style={{
                                 display: 'inline-flex',
                                 alignItems: 'center',
-                                gap: '4px',
-                                padding: '2px 8px',
-                                backgroundColor: 'rgba(31, 122, 77, 0.1)',
+                                gap: '5px',
+                                padding: '3px 10px',
+                                backgroundColor: 'rgba(16, 185, 129, 0.12)',
+                                border: '1px solid rgba(16, 185, 129, 0.25)',
                                 color: 'var(--color-success)',
-                                borderRadius: 'var(--radius-control)',
+                                borderRadius: 'var(--radius-pill)',
                                 fontSize: '11px',
-                                fontWeight: 600,
-                                marginBottom: 'var(--space-2)',
+                                fontWeight: 700,
+                                marginBottom: '10px',
                               }}
                             >
                               <Check size={12} />
@@ -367,22 +418,22 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
 
                           <pre
                             style={{
-                              padding: 'var(--space-3)',
+                              padding: '12px',
                               backgroundColor: 'var(--color-code-bg)',
                               color: 'var(--color-text)',
                               fontFamily: 'var(--font-mono)',
-                              fontSize: 'var(--font-size-xs)',
+                              fontSize: '12px',
                               borderRadius: 'var(--radius-control)',
                               border: '1px solid var(--color-border)',
                               overflowX: 'auto',
-                              lineHeight: '1.4',
-                              maxHeight: '200px',
+                              lineHeight: '1.5',
+                              maxHeight: '220px',
                             }}
                           >
                             <code>{hint.solution_code}</code>
                           </pre>
 
-                          <div style={{ display: 'flex', gap: 'var(--space-2)', marginTop: 'var(--space-2)' }}>
+                          <div style={{ display: 'flex', gap: 'var(--space-2)', marginTop: '10px' }}>
                             {onApplySolution && (
                               <button
                                 type="button"
@@ -390,18 +441,19 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
                                 style={{
                                   display: 'inline-flex',
                                   alignItems: 'center',
-                                  gap: '4px',
-                                  padding: '5px 10px',
-                                  backgroundColor: 'var(--color-accent)',
-                                  color: 'var(--color-on-accent)',
+                                  gap: '6px',
+                                  padding: '7px 14px',
+                                  background: 'var(--color-accent-gradient)',
+                                  color: '#FFFFFF',
                                   border: 'none',
                                   borderRadius: 'var(--radius-control)',
-                                  fontSize: 'var(--font-size-xs)',
-                                  fontWeight: 600,
+                                  fontSize: '12px',
+                                  fontWeight: 700,
+                                  boxShadow: 'var(--shadow-accent-glow)',
                                   cursor: 'pointer',
                                 }}
                               >
-                                <ArrowRight size={12} />
+                                <ArrowRight size={13} />
                                 <span>Apply Fix to Editor</span>
                               </button>
                             )}
@@ -415,31 +467,32 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
                               style={{
                                 display: 'inline-flex',
                                 alignItems: 'center',
-                                gap: '4px',
-                                padding: '5px 10px',
+                                gap: '5px',
+                                padding: '7px 12px',
                                 backgroundColor: 'var(--color-surface-raised)',
                                 color: 'var(--color-text)',
                                 border: '1px solid var(--color-border)',
                                 borderRadius: 'var(--radius-control)',
-                                fontSize: 'var(--font-size-xs)',
+                                fontSize: '12px',
+                                fontWeight: 600,
                                 cursor: 'pointer',
                               }}
                             >
-                              <Copy size={12} />
+                              {copiedLevel5 ? <Check size={13} color="var(--color-success)" /> : <Copy size={13} />}
                               <span>{copiedLevel5 ? 'Copied!' : 'Copy Code'}</span>
                             </button>
                           </div>
 
                           {hint.explanation && (
-                            <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginTop: 'var(--space-2)' }}>
+                            <p style={{ fontSize: '12px', color: 'var(--color-text-muted)', marginTop: '10px', lineHeight: '1.5' }}>
                               <strong>Why this fix works:</strong> {hint.explanation}
                             </p>
                           )}
                         </div>
                       ) : (
-                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-2)', padding: 'var(--space-2)', backgroundColor: 'var(--color-code-bg)', borderRadius: 'var(--radius-control)' }}>
-                          <AlertCircle size={15} style={{ color: 'var(--color-warning)', flexShrink: 0, marginTop: '2px' }} />
-                          <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)' }}>
+                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-2)', padding: '10px', backgroundColor: 'var(--color-code-bg)', borderRadius: 'var(--radius-control)' }}>
+                          <AlertCircle size={16} style={{ color: 'var(--color-warning)', flexShrink: 0, marginTop: '2px' }} />
+                          <p style={{ fontSize: '12px', color: 'var(--color-text-muted)' }}>
                             SocraCode can't verify a full fix for this bug with certainty. Review the worked example in Level 4 or consult your course instructor.
                           </p>
                         </div>
@@ -453,8 +506,8 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      marginTop: 'var(--space-3)',
-                      paddingTop: 'var(--space-2)',
+                      marginTop: '12px',
+                      paddingTop: '8px',
                       borderTop: '1px dashed var(--color-border)',
                       fontSize: '11px',
                       color: 'var(--color-text-muted)',
@@ -462,22 +515,19 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
                   >
                     <span>Was this hint helpful?</span>
                     {feedbackSent[hint.hint_id] ? (
-                      <span style={{ color: 'var(--color-success)', fontWeight: 600 }}>
-                        Thank you for your feedback!
-                      </span>
+                      <span style={{ color: 'var(--color-success)', fontWeight: 600 }}>Thank you for feedback!</span>
                     ) : (
-                      <div style={{ display: 'flex', gap: 'var(--space-1)' }}>
+                      <div style={{ display: 'flex', gap: '6px' }}>
                         <button
                           type="button"
                           onClick={() => handleFeedbackClick(hint.hint_id, true)}
-                          title="Helpful"
                           style={{
                             display: 'inline-flex',
                             alignItems: 'center',
-                            gap: '2px',
-                            padding: '2px 6px',
+                            gap: '3px',
+                            padding: '2px 8px',
                             border: '1px solid var(--color-border)',
-                            borderRadius: '4px',
+                            borderRadius: 'var(--radius-control)',
                             background: 'transparent',
                             color: 'var(--color-text-muted)',
                             cursor: 'pointer',
@@ -489,14 +539,13 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
                         <button
                           type="button"
                           onClick={() => handleFeedbackClick(hint.hint_id, false)}
-                          title="Not helpful"
                           style={{
                             display: 'inline-flex',
                             alignItems: 'center',
-                            gap: '2px',
-                            padding: '2px 6px',
+                            gap: '3px',
+                            padding: '2px 8px',
                             border: '1px solid var(--color-border)',
-                            borderRadius: '4px',
+                            borderRadius: 'var(--radius-control)',
                             background: 'transparent',
                             color: 'var(--color-text-muted)',
                             cursor: 'pointer',
@@ -521,6 +570,7 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
           padding: 'var(--space-3) var(--space-4)',
           backgroundColor: 'var(--color-surface-raised)',
           borderTop: '1px solid var(--color-border)',
+          flexShrink: 0,
         }}
       >
         <button
@@ -532,23 +582,26 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: 'var(--space-2)',
+            gap: '8px',
             width: '100%',
             minHeight: '44px',
             padding: '0 var(--space-3)',
-            backgroundColor: canRequestNext ? 'var(--color-accent)' : 'var(--color-border)',
-            color: canRequestNext ? 'var(--color-on-accent)' : 'var(--color-text-muted)',
+            background: canRequestNext
+              ? 'var(--color-accent-gradient)'
+              : 'var(--color-border)',
+            color: canRequestNext ? '#FFFFFF' : 'var(--color-text-muted)',
             border: 'none',
             borderRadius: 'var(--radius-control)',
-            fontSize: 'var(--font-size-sm)',
-            fontWeight: 600,
+            fontSize: '13px',
+            fontWeight: 700,
             cursor: canRequestNext ? 'pointer' : 'not-allowed',
-            transition: 'background-color var(--transition-fast)',
+            boxShadow: canRequestNext ? 'var(--shadow-accent-glow)' : 'none',
+            transition: 'all var(--transition-fast)',
           }}
         >
           {isLoadingHint ? (
             <>
-              <Loader2 size={16} className="spin-animation" style={{ animation: 'spin 1s linear infinite' }} />
+              <Loader2 size={16} style={{ animation: 'spin 1s linear infinite' }} />
               <span>Analyzing & unlocking hint...</span>
             </>
           ) : !hasActiveAttempt ? (
@@ -556,11 +609,20 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
           ) : currentLevel >= maxLevelAllowed ? (
             <span>Full Solution Reached</span>
           ) : currentLevel === 0 ? (
-            <span>Get Hint (Level 1: Nudge)</span>
+            <>
+              <Sparkles size={15} />
+              <span>Get Hint (Level 1: Nudge)</span>
+            </>
           ) : currentLevel === 4 ? (
-            <span>Show Full Solution (Level 5)</span>
+            <>
+              <CheckSquare size={15} />
+              <span>Show Full Solution (Level 5)</span>
+            </>
           ) : (
-            <span>Get Next Hint (Level {currentLevel + 1})</span>
+            <>
+              <Sparkles size={15} />
+              <span>Get Next Hint (Level {currentLevel + 1})</span>
+            </>
           )}
         </button>
       </div>
@@ -573,7 +635,9 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -586,36 +650,40 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
               backgroundColor: 'var(--color-surface)',
               border: '1px solid var(--color-border)',
               borderRadius: 'var(--radius-container)',
-              padding: 'var(--space-6)',
-              maxWidth: '440px',
+              padding: '24px',
+              maxWidth: '460px',
               width: '100%',
               boxShadow: 'var(--shadow-floating)',
             }}
           >
-            <h3 id="confirm-solution-title" style={{ fontSize: 'var(--font-size-md)', fontWeight: 700 }}>
-              Show Full Solution?
-            </h3>
-            <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-muted)', marginTop: 'var(--space-2)', lineHeight: '1.5' }}>
-              Trying to fix the code yourself first reinforces deeper understanding and problem-solving skill.
-              Are you sure you want to view the complete solution?
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-warning)', marginBottom: '8px' }}>
+              <ShieldAlert size={22} />
+              <h3 id="confirm-solution-title" style={{ fontSize: '16px', fontWeight: 800, margin: 0 }}>
+                Show Full Solution?
+              </h3>
+            </div>
+            <p style={{ fontSize: '13px', color: 'var(--color-text-muted)', lineHeight: '1.6' }}>
+              Trying to fix the code yourself first reinforces deeper understanding and long-term problem-solving stamina.
+              Are you sure you want to reveal the full code solution?
             </p>
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-2)', marginTop: 'var(--space-4)' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '20px' }}>
               <button
                 type="button"
                 autoFocus
                 onClick={() => setShowConfirmLevel5(false)}
                 style={{
-                  padding: '8px 16px',
-                  backgroundColor: 'var(--color-accent)',
-                  color: 'var(--color-on-accent)',
+                  padding: '8px 18px',
+                  background: 'var(--color-accent-gradient)',
+                  color: '#FFFFFF',
                   border: 'none',
                   borderRadius: 'var(--radius-control)',
-                  fontSize: 'var(--font-size-xs)',
-                  fontWeight: 600,
+                  fontSize: '12px',
+                  fontWeight: 700,
+                  boxShadow: 'var(--shadow-accent-glow)',
                   cursor: 'pointer',
                 }}
               >
-                Keep Trying
+                Keep Trying 💪
               </button>
               <button
                 type="button"
@@ -624,9 +692,9 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
                   padding: '8px 14px',
                   backgroundColor: 'transparent',
                   color: 'var(--color-danger)',
-                  border: '1px solid var(--color-danger)',
+                  border: '1px solid rgba(239, 68, 68, 0.4)',
                   borderRadius: 'var(--radius-control)',
-                  fontSize: 'var(--font-size-xs)',
+                  fontSize: '12px',
                   fontWeight: 600,
                   cursor: 'pointer',
                 }}

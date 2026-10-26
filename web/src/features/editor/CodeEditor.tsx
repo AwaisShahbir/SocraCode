@@ -1,6 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Editor from '@monaco-editor/react';
 import type { OnMount } from '@monaco-editor/react';
+import { FileCode2, Copy, Check, Navigation } from 'lucide-react';
 
 interface CodeEditorProps {
   code: string;
@@ -20,6 +21,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
   highlightedLine = null,
 }) => {
   const editorRef = useRef<any>(null);
+  const [copied, setCopied] = useState<boolean>(false);
 
   const handleEditorDidMount: OnMount = (editor, monaco) => {
     editorRef.current = editor;
@@ -48,6 +50,12 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
     }
   }, [highlightedLine]);
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+
   const lineCount = code.split('\n').length;
 
   return (
@@ -61,41 +69,104 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
         overflow: 'hidden',
       }}
     >
-      {/* Editor toolbar */}
+      {/* Sleek Modern Tab Bar */}
       <div
         style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: 'var(--space-2) var(--space-4)',
+          padding: '0 var(--space-3)',
           backgroundColor: 'var(--color-surface-raised)',
           borderBottom: '1px solid var(--color-border)',
-          fontSize: 'var(--font-size-xs)',
-          color: 'var(--color-text-muted)',
+          height: '42px',
+          flexShrink: 0,
         }}
       >
+        {/* Active Tab */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-          <span style={{ fontWeight: 600 }}>main.py</span>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '6px 12px',
+              backgroundColor: 'var(--color-surface)',
+              borderTop: '2px solid var(--color-accent)',
+              borderLeft: '1px solid var(--color-border)',
+              borderRight: '1px solid var(--color-border)',
+              borderBottom: 'none',
+              borderRadius: '6px 6px 0 0',
+              fontSize: '13px',
+              fontWeight: 600,
+              color: 'var(--color-text)',
+            }}
+          >
+            <FileCode2 size={15} color="var(--color-accent)" />
+            <span>factorial.py</span>
+          </div>
+
           {highlightedLine && (
-            <span
+            <div
               style={{
-                backgroundColor: 'rgba(240, 185, 85, 0.2)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+                padding: '3px 8px',
+                background: 'rgba(245, 158, 11, 0.15)',
+                border: '1px solid rgba(245, 158, 11, 0.35)',
+                borderRadius: 'var(--radius-pill)',
                 color: 'var(--color-warning)',
-                padding: '1px 6px',
-                borderRadius: '4px',
-                fontWeight: 600,
+                fontSize: '11px',
+                fontWeight: 700,
               }}
             >
-              Inspecting Line {highlightedLine}
-            </span>
+              <Navigation size={11} />
+              <span>Inspecting Line {highlightedLine}</span>
+            </div>
           )}
         </div>
-        <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
-          <span>{lineCount} lines</span>
-          <span>Saved just now</span>
-          <span title="Press Ctrl+Enter to execute code">
-            <kbd style={{ backgroundColor: 'var(--color-code-bg)', padding: '1px 4px', borderRadius: '4px', border: '1px solid var(--color-border)' }}>Ctrl</kbd> + <kbd style={{ backgroundColor: 'var(--color-code-bg)', padding: '1px 4px', borderRadius: '4px', border: '1px solid var(--color-border)' }}>Enter</kbd> to run
+
+        {/* Right Info & Actions */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
+          <span style={{ fontSize: '12px', color: 'var(--color-text-muted)', fontFamily: 'var(--font-mono)' }}>
+            {lineCount} lines
           </span>
+
+          <button
+            type="button"
+            onClick={handleCopy}
+            title="Copy Code"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              padding: '4px 8px',
+              backgroundColor: 'transparent',
+              border: '1px solid var(--color-border)',
+              borderRadius: 'var(--radius-control)',
+              color: copied ? 'var(--color-success)' : 'var(--color-text-muted)',
+              fontSize: '11px',
+              fontWeight: 600,
+            }}
+          >
+            {copied ? <Check size={12} /> : <Copy size={12} />}
+            <span>{copied ? 'Copied!' : 'Copy'}</span>
+          </button>
+
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '3px',
+              fontSize: '11px',
+              color: 'var(--color-text-muted)',
+            }}
+          >
+            <span className="kbd-key">Ctrl</span>
+            <span>+</span>
+            <span className="kbd-key">Enter</span>
+            <span style={{ marginLeft: '2px' }}>to run</span>
+          </div>
         </div>
       </div>
 
@@ -111,14 +182,17 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
           options={{
             fontSize: 14,
             fontFamily: "'JetBrains Mono', 'Fira Code', Consolas, monospace",
-            lineHeight: 22,
+            lineHeight: 23,
             minimap: { enabled: false },
             scrollBeyondLastLine: false,
             smoothScrolling: true,
             tabSize: 4,
             wordWrap: 'on',
             automaticLayout: true,
-            padding: { top: 12, bottom: 12 },
+            padding: { top: 14, bottom: 14 },
+            cursorBlinking: 'smooth',
+            cursorSmoothCaretAnimation: 'on',
+            renderLineHighlight: 'all',
           }}
         />
       </div>

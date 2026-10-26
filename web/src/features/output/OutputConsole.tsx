@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Terminal, AlertCircle, CheckCircle2, Clock, Trash2, Loader2 } from 'lucide-react';
+import { Terminal, AlertCircle, CheckCircle2, Zap, Trash2, Loader2, Copy, Check } from 'lucide-react';
 import type { RunResult } from '../../types/runner';
 
 interface OutputConsoleProps {
@@ -14,6 +14,7 @@ export const OutputConsole: React.FC<OutputConsoleProps> = ({
   onClear,
 }) => {
   const [activeTab, setActiveTab] = useState<'output' | 'stderr'>('output');
+  const [copied, setCopied] = useState<boolean>(false);
 
   // Automatically switch tab if there are errors and no stdout
   React.useEffect(() => {
@@ -27,6 +28,15 @@ export const OutputConsole: React.FC<OutputConsoleProps> = ({
   }, [result]);
 
   const hasStderr = Boolean(result && result.stderr);
+
+  const handleCopy = () => {
+    const textToCopy = activeTab === 'output' ? result?.stdout : result?.stderr;
+    if (textToCopy) {
+      navigator.clipboard.writeText(textToCopy);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    }
+  };
 
   return (
     <div
@@ -48,7 +58,8 @@ export const OutputConsole: React.FC<OutputConsoleProps> = ({
           padding: '0 var(--space-3)',
           backgroundColor: 'var(--color-surface-raised)',
           borderBottom: '1px solid var(--color-border)',
-          height: '40px',
+          height: '42px',
+          flexShrink: 0,
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-1)' }}>
@@ -58,18 +69,19 @@ export const OutputConsole: React.FC<OutputConsoleProps> = ({
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 'var(--space-1)',
-              padding: '6px var(--space-3)',
+              gap: '6px',
+              padding: '6px 12px',
               border: 'none',
-              background: 'transparent',
-              fontSize: 'var(--font-size-xs)',
-              fontWeight: 600,
+              borderRadius: 'var(--radius-control)',
+              background: activeTab === 'output' ? 'var(--color-surface)' : 'transparent',
+              fontSize: '12px',
+              fontWeight: 700,
               color: activeTab === 'output' ? 'var(--color-accent)' : 'var(--color-text-muted)',
-              borderBottom: activeTab === 'output' ? '2px solid var(--color-accent)' : '2px solid transparent',
+              boxShadow: activeTab === 'output' ? 'var(--shadow-sm)' : 'none',
             }}
           >
             <Terminal size={14} />
-            <span>Standard Output</span>
+            <span>Stdout</span>
           </button>
 
           <button
@@ -78,14 +90,15 @@ export const OutputConsole: React.FC<OutputConsoleProps> = ({
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 'var(--space-1)',
-              padding: '6px var(--space-3)',
+              gap: '6px',
+              padding: '6px 12px',
               border: 'none',
-              background: 'transparent',
-              fontSize: 'var(--font-size-xs)',
-              fontWeight: 600,
+              borderRadius: 'var(--radius-control)',
+              background: activeTab === 'stderr' ? 'var(--color-surface)' : 'transparent',
+              fontSize: '12px',
+              fontWeight: 700,
               color: activeTab === 'stderr' ? 'var(--color-danger)' : 'var(--color-text-muted)',
-              borderBottom: activeTab === 'stderr' ? '2px solid var(--color-danger)' : '2px solid transparent',
+              boxShadow: activeTab === 'stderr' ? 'var(--shadow-sm)' : 'none',
             }}
           >
             <AlertCircle size={14} />
@@ -98,6 +111,7 @@ export const OutputConsole: React.FC<OutputConsoleProps> = ({
                   height: '6px',
                   borderRadius: '50%',
                   backgroundColor: 'var(--color-danger)',
+                  boxShadow: '0 0 6px var(--color-danger)',
                 }}
               />
             )}
@@ -105,19 +119,23 @@ export const OutputConsole: React.FC<OutputConsoleProps> = ({
         </div>
 
         {/* Status Pill & Action */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
           {isRunning && (
             <span
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: 'var(--space-1)',
-                fontSize: 'var(--font-size-xs)',
+                gap: '6px',
+                fontSize: '11px',
+                fontWeight: 600,
                 color: 'var(--color-accent)',
+                padding: '3px 8px',
+                background: 'rgba(99, 102, 241, 0.1)',
+                borderRadius: 'var(--radius-pill)',
               }}
             >
-              <Loader2 size={13} className="spin-animation" style={{ animation: 'spin 1s linear infinite' }} />
-              <span>Running code...</span>
+              <Loader2 size={12} style={{ animation: 'spin 1s linear infinite' }} />
+              <span>Executing in sandbox...</span>
             </span>
           )}
 
@@ -129,14 +147,16 @@ export const OutputConsole: React.FC<OutputConsoleProps> = ({
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '4px',
-                    fontSize: 'var(--font-size-xs)',
+                    fontSize: '11px',
+                    fontWeight: 700,
                     color: 'var(--color-success)',
-                    backgroundColor: 'rgba(31, 122, 77, 0.1)',
+                    backgroundColor: 'rgba(16, 185, 129, 0.12)',
+                    border: '1px solid rgba(16, 185, 129, 0.25)',
                     padding: '2px 8px',
-                    borderRadius: 'var(--radius-control)',
+                    borderRadius: 'var(--radius-pill)',
                   }}
                 >
-                  <CheckCircle2 size={13} />
+                  <CheckCircle2 size={12} />
                   <span>Exit 0</span>
                 </span>
               ) : (
@@ -145,14 +165,16 @@ export const OutputConsole: React.FC<OutputConsoleProps> = ({
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '4px',
-                    fontSize: 'var(--font-size-xs)',
+                    fontSize: '11px',
+                    fontWeight: 700,
                     color: 'var(--color-danger)',
-                    backgroundColor: 'rgba(179, 38, 30, 0.1)',
+                    backgroundColor: 'rgba(239, 68, 68, 0.12)',
+                    border: '1px solid rgba(239, 68, 68, 0.25)',
                     padding: '2px 8px',
-                    borderRadius: 'var(--radius-control)',
+                    borderRadius: 'var(--radius-pill)',
                   }}
                 >
-                  <AlertCircle size={13} />
+                  <AlertCircle size={12} />
                   <span>{result.timed_out ? 'Timed Out' : `Exit ${result.exit_code}`}</span>
                 </span>
               )}
@@ -161,34 +183,56 @@ export const OutputConsole: React.FC<OutputConsoleProps> = ({
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '2px',
-                  fontSize: 'var(--font-size-xs)',
+                  gap: '3px',
+                  fontSize: '11px',
+                  fontWeight: 600,
                   color: 'var(--color-text-muted)',
+                  padding: '2px 6px',
+                  background: 'var(--color-surface)',
+                  borderRadius: 'var(--radius-control)',
+                  border: '1px solid var(--color-border)',
                 }}
               >
-                <Clock size={12} />
-                <span>{result.duration_ms} ms</span>
+                <Zap size={11} color="var(--color-warning)" />
+                <span>{result.duration_ms}ms</span>
               </span>
-            </div>
-          )}
 
-          {result && (
-            <button
-              type="button"
-              onClick={onClear}
-              title="Clear Console Output"
-              style={{
-                background: 'transparent',
-                border: 'none',
-                color: 'var(--color-text-muted)',
-                padding: '4px',
-                borderRadius: 'var(--radius-control)',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <Trash2 size={14} />
-            </button>
+              <button
+                type="button"
+                onClick={handleCopy}
+                title="Copy Terminal Output"
+                style={{
+                  background: 'transparent',
+                  border: '1px solid var(--color-border)',
+                  color: copied ? 'var(--color-success)' : 'var(--color-text-muted)',
+                  padding: '4px 6px',
+                  borderRadius: 'var(--radius-control)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  fontSize: '11px',
+                }}
+              >
+                {copied ? <Check size={12} /> : <Copy size={12} />}
+              </button>
+
+              <button
+                type="button"
+                onClick={onClear}
+                title="Clear Console Output"
+                style={{
+                  background: 'transparent',
+                  border: '1px solid var(--color-border)',
+                  color: 'var(--color-text-muted)',
+                  padding: '4px 6px',
+                  borderRadius: 'var(--radius-control)',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <Trash2 size={12} />
+              </button>
+            </div>
           )}
         </div>
       </div>
@@ -203,8 +247,8 @@ export const OutputConsole: React.FC<OutputConsoleProps> = ({
           backgroundColor: 'var(--color-code-bg)',
           color: 'var(--color-text)',
           fontFamily: 'var(--font-mono)',
-          fontSize: 'var(--font-size-sm)',
-          lineHeight: '1.5',
+          fontSize: '13px',
+          lineHeight: '1.6',
           overflowY: 'auto',
           whiteSpace: 'pre-wrap',
           wordBreak: 'break-all',
@@ -212,19 +256,29 @@ export const OutputConsole: React.FC<OutputConsoleProps> = ({
       >
         {activeTab === 'output' ? (
           result?.stdout ? (
-            result.stdout
+            <div style={{ color: 'var(--color-text)' }}>{result.stdout}</div>
           ) : (
-            <span style={{ color: 'var(--color-text-muted)', fontStyle: 'italic' }}>
-              {result ? '(No standard output generated)' : 'Click [Run] or press Ctrl+Enter to execute program.'}
-            </span>
+            <div style={{ color: 'var(--color-text-muted)', fontStyle: 'italic', padding: '12px 0' }}>
+              {result ? '(No stdout produced)' : 'Hit [Run Code] or press Ctrl+Enter to execute program in sandbox.'}
+            </div>
           )
         ) : (
           result?.stderr ? (
-            <span style={{ color: 'var(--color-danger)' }}>{result.stderr}</span>
+            <div
+              style={{
+                color: 'var(--color-danger)',
+                background: 'rgba(239, 68, 68, 0.05)',
+                padding: '10px 12px',
+                borderRadius: 'var(--radius-control)',
+                border: '1px solid rgba(239, 68, 68, 0.15)',
+              }}
+            >
+              {result.stderr}
+            </div>
           ) : (
-            <span style={{ color: 'var(--color-text-muted)', fontStyle: 'italic' }}>
-              {result ? '(No errors or exceptions encountered)' : 'Error tracebacks and compiler diagnostics will appear here.'}
-            </span>
+            <div style={{ color: 'var(--color-text-muted)', fontStyle: 'italic', padding: '12px 0' }}>
+              {result ? 'No errors encountered! Execution was clean.' : 'Runtime errors and compiler diagnostics will appear here.'}
+            </div>
           )
         )}
       </div>

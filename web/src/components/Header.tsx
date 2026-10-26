@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sun, Moon, Monitor, Code2, BookOpen } from 'lucide-react';
+import { Sun, Moon, Monitor, Sparkles, Terminal, Flame, ShieldCheck } from 'lucide-react';
 import type { ThemeMode } from '../types/runner';
 
 interface HeaderProps {
@@ -14,88 +14,144 @@ export const Header: React.FC<HeaderProps> = ({ themeMode, onThemeChange }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 var(--space-4)',
-        height: '56px',
-        backgroundColor: 'var(--color-surface)',
+        padding: '0 var(--space-5)',
+        height: '60px',
+        backgroundColor: 'var(--color-surface-glass)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
         borderBottom: '1px solid var(--color-border)',
+        position: 'relative',
+        zIndex: 20,
         flexShrink: 0,
       }}
     >
-      {/* Brand & Context */}
+      {/* Brand & Context Badges */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
+        {/* Animated Gradient Logo Icon */}
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            width: '32px',
-            height: '32px',
-            borderRadius: 'var(--radius-control)',
-            backgroundColor: 'var(--color-accent)',
-            color: 'var(--color-on-accent)',
+            width: '36px',
+            height: '36px',
+            borderRadius: '10px',
+            background: 'var(--color-accent-gradient)',
+            color: '#FFFFFF',
+            boxShadow: 'var(--shadow-accent-glow)',
           }}
           aria-hidden="true"
         >
-          <Code2 size={20} />
+          <Sparkles size={19} />
         </div>
-        <div>
-          <span style={{ fontWeight: 700, fontSize: 'var(--font-size-md)', letterSpacing: '-0.3px' }}>
+
+        {/* Title & Tag */}
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 'var(--space-2)' }}>
+          <span
+            style={{
+              fontWeight: 800,
+              fontSize: '18px',
+              letterSpacing: '-0.5px',
+              background: 'linear-gradient(135deg, var(--color-text) 60%, var(--color-accent) 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
             SocraCode
           </span>
           <span
             style={{
-              marginLeft: 'var(--space-2)',
-              fontSize: 'var(--font-size-xs)',
-              color: 'var(--color-text-muted)',
-              padding: '2px 6px',
-              backgroundColor: 'var(--color-code-bg)',
-              borderRadius: 'var(--radius-control)',
+              fontSize: '11px',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.6px',
+              color: 'var(--color-accent)',
+              padding: '2px 8px',
+              background: 'rgba(99, 102, 241, 0.12)',
+              border: '1px solid rgba(99, 102, 241, 0.25)',
+              borderRadius: 'var(--radius-pill)',
             }}
           >
-            Step 1 · Prototype
+            AI Socratic Tutor
           </span>
         </div>
 
+        {/* Status Pill: Sandbox Isolation */}
         <div
           style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: 'var(--space-1)',
-            marginLeft: 'var(--space-4)',
-            padding: '2px var(--space-2)',
-            fontSize: 'var(--font-size-xs)',
-            color: 'var(--color-accent)',
-            border: '1px solid var(--color-border)',
-            borderRadius: 'var(--radius-control)',
+            gap: '6px',
+            marginLeft: 'var(--space-2)',
+            padding: '3px 10px',
+            fontSize: '12px',
+            fontWeight: 600,
+            color: 'var(--color-success)',
+            background: 'rgba(16, 185, 129, 0.08)',
+            border: '1px solid rgba(16, 185, 129, 0.2)',
+            borderRadius: 'var(--radius-pill)',
           }}
         >
-          <BookOpen size={14} />
-          <span>Free Practice</span>
+          <span className="pulsing-live-dot" aria-hidden="true" />
+          <span>Sandbox Active</span>
+        </div>
+
+        {/* Gamified Streak Pill */}
+        <div
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '5px',
+            padding: '3px 10px',
+            fontSize: '12px',
+            fontWeight: 600,
+            color: 'var(--color-warning)',
+            background: 'rgba(245, 158, 11, 0.08)',
+            border: '1px solid rgba(245, 158, 11, 0.2)',
+            borderRadius: 'var(--radius-pill)',
+          }}
+        >
+          <Flame size={13} fill="currentColor" />
+          <span>Free Practice Mode</span>
         </div>
       </div>
 
-      {/* Language & Theme Controls */}
+      {/* Controls & Tools */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
-        {/* Language selector */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-          <label htmlFor="language-select" style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)' }}>
-            Language:
-          </label>
-          <select
-            id="language-select"
-            value="python"
-            disabled
-            style={{
-              backgroundColor: 'var(--color-surface-raised)',
-              color: 'var(--color-text)',
-              border: '1px solid var(--color-border)',
-              borderRadius: 'var(--radius-control)',
-              padding: '4px var(--space-2)',
-              fontSize: 'var(--font-size-sm)',
-            }}
-          >
-            <option value="python">Python 3.13</option>
-          </select>
+        {/* Language Badge */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            padding: '4px 10px',
+            background: 'var(--color-surface-raised)',
+            border: '1px solid var(--color-border)',
+            borderRadius: 'var(--radius-control)',
+            fontSize: '13px',
+            fontWeight: 600,
+            color: 'var(--color-text)',
+          }}
+        >
+          <Terminal size={14} color="var(--color-accent)" />
+          <span>Python 3.13</span>
+        </div>
+
+        {/* Security / Privacy Badge */}
+        <div
+          title="Zero pre-trained leaks; local sandbox execution"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+            padding: '4px 8px',
+            fontSize: '11px',
+            color: 'var(--color-text-muted)',
+            cursor: 'default',
+          }}
+        >
+          <ShieldCheck size={14} color="var(--color-success)" />
+          <span>AST Verified</span>
         </div>
 
         {/* Theme Segmented Switcher */}
@@ -105,10 +161,11 @@ export const Header: React.FC<HeaderProps> = ({ themeMode, onThemeChange }) => {
           style={{
             display: 'flex',
             alignItems: 'center',
-            backgroundColor: 'var(--color-code-bg)',
+            background: 'var(--color-surface-raised)',
             border: '1px solid var(--color-border)',
-            borderRadius: 'var(--radius-control)',
-            padding: '2px',
+            borderRadius: 'var(--radius-pill)',
+            padding: '3px',
+            gap: '2px',
           }}
         >
           <button
@@ -123,10 +180,10 @@ export const Header: React.FC<HeaderProps> = ({ themeMode, onThemeChange }) => {
               width: '28px',
               height: '28px',
               border: 'none',
-              borderRadius: 'var(--radius-control)',
+              borderRadius: 'var(--radius-pill)',
               backgroundColor: themeMode === 'light' ? 'var(--color-surface)' : 'transparent',
               color: themeMode === 'light' ? 'var(--color-accent)' : 'var(--color-text-muted)',
-              transition: 'all var(--transition-fast)',
+              boxShadow: themeMode === 'light' ? 'var(--shadow-sm)' : 'none',
             }}
           >
             <Sun size={15} />
@@ -143,10 +200,10 @@ export const Header: React.FC<HeaderProps> = ({ themeMode, onThemeChange }) => {
               width: '28px',
               height: '28px',
               border: 'none',
-              borderRadius: 'var(--radius-control)',
+              borderRadius: 'var(--radius-pill)',
               backgroundColor: themeMode === 'dark' ? 'var(--color-surface)' : 'transparent',
               color: themeMode === 'dark' ? 'var(--color-accent)' : 'var(--color-text-muted)',
-              transition: 'all var(--transition-fast)',
+              boxShadow: themeMode === 'dark' ? 'var(--shadow-sm)' : 'none',
             }}
           >
             <Moon size={15} />
@@ -163,10 +220,10 @@ export const Header: React.FC<HeaderProps> = ({ themeMode, onThemeChange }) => {
               width: '28px',
               height: '28px',
               border: 'none',
-              borderRadius: 'var(--radius-control)',
+              borderRadius: 'var(--radius-pill)',
               backgroundColor: themeMode === 'system' ? 'var(--color-surface)' : 'transparent',
               color: themeMode === 'system' ? 'var(--color-accent)' : 'var(--color-text-muted)',
-              transition: 'all var(--transition-fast)',
+              boxShadow: themeMode === 'system' ? 'var(--shadow-sm)' : 'none',
             }}
           >
             <Monitor size={15} />
