@@ -99,32 +99,54 @@ class BugInjector:
         target_idx = random.choice(candidate_indices)
         lines[target_idx] = lines[target_idx].replace("return ", "# return ")
         return "\n".join(lines), "missing_return", target_idx + 1
-
-    def mutate_program(self, code: str) -> Dict[str, object]:
-        """Applies a random bug mutation to a program."""
-        mutators = [
-            self.inject_missing_colon,
-            self.inject_off_by_one,
-            self.inject_undefined_name,
-            self.inject_wrong_operator,
-            self.inject_missing_return,
+    def inject_missing_semicolon(self, code: str) -> Tuple[str, str, int]:
+        """Removes a semicolon from a Java or C++ statement."""
+        lines = code.splitlines()
+        candidates = [
+            i for i, line in enumerate(lines)
+            if line.rstrip().endswith(";") and not line.strip().startswith("//")
         ]
+        if not candidates:
+            return code, "syntax_error", 1
+        target_idx = random.choice(candidates)
+        lines[target_idx] = lines[target_idx].rstrip()[:-1]
+        return "\n".join(lines), "syntax_error", target_idx + 1
+
+    def mutate_program(self, code: str, language: str = "python") -> Dict[str, object]:
+        """Applies a random bug mutation to a Python, Java, or C++ program."""
+        norm_lang = language.lower()
+        if norm_lang in ("java", "cpp", "c++"):
+            mutators = [
+                self.inject_missing_semicolon,
+                self.inject_undefined_name,
+                self.inject_wrong_operator,
+                self.inject_missing_return,
+            ]
+        else:
+            mutators = [
+                self.inject_missing_colon,
+                self.inject_off_by_one,
+                self.inject_undefined_name,
+                self.inject_wrong_operator,
+                self.inject_missing_return,
+            ]
         chosen_mutator = random.choice(mutators)
         mutated_code, category, line_no = chosen_mutator(code)
 
         return {
+            "language": language,
             "original_code": code,
             "mutated_code": mutated_code,
             "bug_category": category,
             "buggy_line": line_no,
         }
 
-    def generate_batch(self, programs: List[str], samples_per_program: int = 5) -> List[Dict[str, object]]:
-        """Generates a dataset of mutated programs."""
+    def generate_batch(self, items: List[Tuple[str, str]], samples_per_program: int = 10) -> List[Dict[str, object]]:
+        """Generates a dataset of mutated programs for multiple languages."""
         dataset = []
-        for prog in programs:
+        for code, lang in items:
             for _ in range(samples_per_program):
-                mutated = self.mutate_program(prog)
+                mutated = self.mutate_program(code, language=lang)
                 dataset.append(mutated)
         return dataset
 
@@ -138,23 +160,25 @@ def run_generation():
     programs = []
     if os.path.exists(raw_dir):
         for fname in os.listdir(raw_dir):
-            if fname.endswith(".py"):
+            ext = os.path.splitext(fname)[1].lower()
+            lang = "python" if ext == ".py" else ("java" if ext == ".java" else ("cpp" if ext == ".cpp" else None))
+            if lang:
                 with open(os.path.join(raw_dir, fname), "r", encoding="utf-8") as f:
-                    programs.append(f.read())
+                    programs.append((f.read(), lang))
 
     if not programs:
         programs = [
-            "def sum_all(arr):\n    s = 0\n    for x in arr:\n        s = s + x\n    return s\n"
+            ("def sum_all(arr):\n    s = 0\n    for x in arr:\n        s = s + x\n    return s\n", "python")
         ]
 
     injector = BugInjector(seed=42)
-    dataset = injector.generate_batch(programs, samples_per_program=10)
+    dataset = injector.generate_batch(programs, samples_per_program=30)
 
     out_file = os.path.join(gen_dir, "synthetic_dataset.json")
     with open(out_file, "w", encoding="utf-8") as f:
         json.dump(dataset, f, indent=2)
 
-    print(f"Generated {len(dataset)} synthetic buggy programs -> {out_file}")
+    print(f"Generated {len(dataset)} multi-language synthetic buggy programs -> {out_file}")
 
 
 if __name__ == "__main__":

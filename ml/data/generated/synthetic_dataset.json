@@ -1,182 +1,1892 @@
 [
   {
-    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
-    "mutated_code": "def find_max(numbers)\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
     "bug_category": "syntax_error",
-    "buggy_line": 1
+    "buggy_line": 3
   },
   {
-    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
-    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val_typo = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length != 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int_typo maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
     "bug_category": "undefined_name",
     "buggy_line": 4
   },
   {
-    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
-    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
-    "bug_category": "index_out_of_range",
-    "buggy_line": 1
-  },
-  {
-    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
-    "mutated_code": "def find_max(numbers)\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal\n    }\n}",
     "bug_category": "syntax_error",
-    "buggy_line": 1
+    "buggy_line": 10
   },
   {
-    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
-    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    # return max_val",
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0]\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 4
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if_typo (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        # return maxVal;\n    }\n}",
     "bug_category": "missing_return",
+    "buggy_line": 10
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        # return maxVal;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 10
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0]\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 4
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        # return maxVal;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 10
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length != 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for_typo (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal\n    }\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 10
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i]\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 7
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] < maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 6
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length != 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        # return maxVal;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 10
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        # return maxVal;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 10
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] < maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 6
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] < maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 6
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if_typo (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for_typo (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return_typo -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i > numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length != 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i > numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (i_typont i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0]\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 4
+  },
+  {
+    "language": "java",
+    "original_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}\n",
+    "mutated_code": "public class FindMax {\n    public static int findMax(int[] numbers) {\n        if (numbers.length == 0) return -1;\n        int maxVal_typo = numbers[0];\n        for (int i = 1; i < numbers.length; i++) {\n            if (numbers[i] > maxVal) {\n                maxVal = numbers[i];\n            }\n        }\n        return maxVal;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 4
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    # return max_val;\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 11
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val_typo = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "undefined_name",
     "buggy_line": 8
   },
   {
-    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
-    "mutated_code": "def find_max(numbers)\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0]\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}",
     "bug_category": "syntax_error",
-    "buggy_line": 1
+    "buggy_line": 5
   },
   {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i]\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    # return max_val;\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 11
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0]\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 5
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i > numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 6
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    # return max_val;\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 11
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    # return max_val;\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 11
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i > numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 6
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val_typo = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    # return max_val;\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 11
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i > numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 6
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val_typo = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 4
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0]\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 5
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val_typo = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 11
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    # return max_val;\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 11
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i > numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 6
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i]\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i > numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 6
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] < max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 7
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for_typo (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 6
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i > numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 6
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i]\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val_typo = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 5
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val_typo = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] < max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 7
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1;\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}\n",
+    "mutated_code": "#include <vector>\n\nint find_max(const std::vector<int>& numbers) {\n    if (numbers.empty()) return -1\n    int max_val = numbers[0];\n    for (size_t i = 1; i < numbers.size(); i++) {\n        if (numbers[i] > max_val) {\n            max_val = numbers[i];\n        }\n    }\n    return max_val;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 4
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val_typo = num\n    return max_val",
+    "bug_category": "undefined_name",
+    "buggy_line": 7
+  },
+  {
+    "language": "python",
     "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
     "mutated_code": "def find_max(numbers):\n    if not numbers\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
     "bug_category": "syntax_error",
     "buggy_line": 2
   },
   {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        # return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
+    "bug_category": "missing_return",
+    "buggy_line": 3
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val\n            max_val = num\n    return max_val",
+    "bug_category": "syntax_error",
+    "buggy_line": 6
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
+    "bug_category": "syntax_error",
+    "buggy_line": 2
+  },
+  {
+    "language": "python",
     "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
     "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
     "bug_category": "index_out_of_range",
     "buggy_line": 1
   },
   {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num < max_val:\n            max_val = num\n    return max_val",
+    "bug_category": "wrong_operator",
+    "buggy_line": 6
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val_typo = num\n    return max_val",
+    "bug_category": "undefined_name",
+    "buggy_line": 7
+  },
+  {
+    "language": "python",
     "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
     "mutated_code": "def find_max(numbers):\n    if not numbers:\n        # return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
     "bug_category": "missing_return",
     "buggy_line": 3
   },
   {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num_typo\n    return max_val",
+    "bug_category": "undefined_name",
+    "buggy_line": 7
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num < max_val:\n            max_val = num\n    return max_val",
+    "bug_category": "wrong_operator",
+    "buggy_line": 6
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
+    "bug_category": "syntax_error",
+    "buggy_line": 2
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "bug_category": "index_out_of_range",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers\n        if num > max_val:\n            max_val = num\n    return max_val",
+    "bug_category": "syntax_error",
+    "buggy_line": 5
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
+    "bug_category": "syntax_error",
+    "buggy_line": 2
+  },
+  {
+    "language": "python",
     "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
     "mutated_code": "def find_max(numbers):\n    if not numbers:\n        # return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
     "bug_category": "missing_return",
     "buggy_line": 3
   },
   {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers)\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
+    "bug_category": "syntax_error",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
+    "bug_category": "syntax_error",
+    "buggy_line": 2
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers)\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
+    "bug_category": "syntax_error",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val_typo = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
+    "bug_category": "undefined_name",
+    "buggy_line": 4
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val_typo = num\n    return max_val",
+    "bug_category": "undefined_name",
+    "buggy_line": 7
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        # return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
+    "bug_category": "missing_return",
+    "buggy_line": 3
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    # return max_val",
+    "bug_category": "missing_return",
+    "buggy_line": 8
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "bug_category": "index_out_of_range",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num < max_val:\n            max_val = num\n    return max_val",
+    "bug_category": "wrong_operator",
+    "buggy_line": 6
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "bug_category": "index_out_of_range",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers)\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
+    "bug_category": "syntax_error",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num < max_val:\n            max_val = num\n    return max_val",
+    "bug_category": "wrong_operator",
+    "buggy_line": 6
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num < max_val:\n            max_val = num\n    return max_val",
+    "bug_category": "wrong_operator",
+    "buggy_line": 6
+  },
+  {
+    "language": "python",
+    "original_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "mutated_code": "def find_max(numbers):\n    if not numbers:\n        return None\n    max_val = numbers[0]\n    for num in numbers:\n        if num < max_val:\n            max_val = num\n    return max_val",
+    "bug_category": "wrong_operator",
+    "buggy_line": 6
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        # return -1;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 8
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (i_typont i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                # return i;\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                # return i;\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] != target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 4
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (i_typont i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (i_typont i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        # return -1;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 8
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if_typo (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 4
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if_typo (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 4
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        # return -1;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 8
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        # return -1;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 8
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        # return -1;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 8
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (i_typont i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (i_typont i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1\n    }\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 8
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                # return i;\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (i_typont i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                # return i;\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (i_typont i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1\n    }\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 8
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] != target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 4
+  },
+  {
+    "language": "java",
+    "original_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}\n",
+    "mutated_code": "public class LinearSearch {\n    public static int search(int[] arr, int target) {\n        for (int i = 0; i < arr.length; i++) {\n            if_typo (arr[i] == target) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 4
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] != target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 5
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if_typo (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 5
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i > arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 4
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 9
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i)\n        }\n    }\n    return -1;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 6
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if_typo (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 5
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i > arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 4
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if_typo (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 5
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if_typo (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 5
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 9
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i)\n        }\n    }\n    return -1;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 6
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i > arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 4
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i)\n        }\n    }\n    return -1;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 6
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] != target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 5
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if_typo (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 5
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] != target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 5
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i > arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 4
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 9
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i > arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 4
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 9
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if_typo (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 5
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    # return -1;\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 9
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i)\n        }\n    }\n    return -1;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 6
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i)\n        }\n    }\n    return -1;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 6
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 9
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if_typo (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 5
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 9
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i > arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 4
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i > arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}",
+    "bug_category": "wrong_operator",
+    "buggy_line": 4
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (size_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}\n",
+    "mutated_code": "#include <vector>\n\nint linear_search(const std::vector<int>& arr, int target) {\n    for (si_typoze_t i = 0; i < arr.size(); i++) {\n        if (arr[i] == target) {\n            return static_cast<int>(i);\n        }\n    }\n    return -1;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 4
+  },
+  {
+    "language": "python",
     "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
     "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    # return -1",
     "bug_category": "missing_return",
     "buggy_line": 5
   },
   {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            # return i\n    return -1",
+    "bug_category": "missing_return",
+    "buggy_line": 4
+  },
+  {
+    "language": "python",
     "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
     "mutated_code": "def linear_search(arr, target):\n    for i in range(1, len(arr)):\n        if arr[i] == target:\n            return i\n    return -1",
     "bug_category": "index_out_of_range",
     "buggy_line": 2
   },
   {
+    "language": "python",
     "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
-    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    # return -1",
-    "bug_category": "missing_return",
-    "buggy_line": 5
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(1, len(arr)):\n        if arr[i] == target:\n            return i\n    return -1",
+    "bug_category": "index_out_of_range",
+    "buggy_line": 2
   },
   {
+    "language": "python",
     "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
     "mutated_code": "def linear_search(arr, target)\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1",
     "bug_category": "syntax_error",
     "buggy_line": 1
   },
   {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if_typo arr[i] == target:\n            return i\n    return -1",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if_typo arr[i] == target:\n            return i\n    return -1",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "python",
     "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
     "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] != target:\n            return i\n    return -1",
     "bug_category": "wrong_operator",
     "buggy_line": 3
   },
   {
-    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
-    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if_typo arr[i] == target:\n            return i\n    return -1",
-    "bug_category": "undefined_name",
-    "buggy_line": 3
-  },
-  {
-    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
-    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if_typo arr[i] == target:\n            return i\n    return -1",
-    "bug_category": "undefined_name",
-    "buggy_line": 3
-  },
-  {
+    "language": "python",
     "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
     "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] != target:\n            return i\n    return -1",
     "bug_category": "wrong_operator",
     "buggy_line": 3
   },
   {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(1, len(arr)):\n        if arr[i] == target:\n            return i\n    return -1",
+    "bug_category": "index_out_of_range",
+    "buggy_line": 2
+  },
+  {
+    "language": "python",
     "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
     "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if_typo arr[i] == target:\n            return i\n    return -1",
     "bug_category": "undefined_name",
     "buggy_line": 3
   },
   {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(1, len(arr)):\n        if arr[i] == target:\n            return i\n    return -1",
+    "bug_category": "index_out_of_range",
+    "buggy_line": 2
+  },
+  {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(1, len(arr)):\n        if arr[i] == target:\n            return i\n    return -1",
+    "bug_category": "index_out_of_range",
+    "buggy_line": 2
+  },
+  {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if_typo arr[i] == target:\n            return i\n    return -1",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if_typo arr[i] == target:\n            return i\n    return -1",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    # return -1",
+    "bug_category": "missing_return",
+    "buggy_line": 5
+  },
+  {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target)\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1",
+    "bug_category": "syntax_error",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if_typo arr[i] == target:\n            return i\n    return -1",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target)\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1",
+    "bug_category": "syntax_error",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    # return -1",
+    "bug_category": "missing_return",
+    "buggy_line": 5
+  },
+  {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if_typo arr[i] == target:\n            return i\n    return -1",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            # return i\n    return -1",
+    "bug_category": "missing_return",
+    "buggy_line": 4
+  },
+  {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] != target:\n            return i\n    return -1",
+    "bug_category": "wrong_operator",
+    "buggy_line": 3
+  },
+  {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if_typo arr[i] == target:\n            return i\n    return -1",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "python",
     "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
     "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target\n            return i\n    return -1",
     "bug_category": "syntax_error",
     "buggy_line": 3
   },
   {
-    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
-    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            # return i\n    return -1",
+    "bug_category": "missing_return",
+    "buggy_line": 4
+  },
+  {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if_typo arr[i] == target:\n            return i\n    return -1",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if_typo arr[i] == target:\n            return i\n    return -1",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if_typo arr[i] == target:\n            return i\n    return -1",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "python",
+    "original_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n",
+    "mutated_code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if_typo arr[i] == target:\n            return i\n    return -1",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total_typo = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        # return total;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 7
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
     "bug_category": "wrong_operator",
     "buggy_line": 1
   },
   {
-    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
-    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    # return total",
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        # return total;\n    }\n}",
     "bug_category": "missing_return",
+    "buggy_line": 7
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "bug_category": "wrong_operator",
+    "buggy_line": 1
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "bug_category": "wrong_operator",
+    "buggy_line": 1
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total_typo += num;\n        }\n        return total;\n    }\n}",
+    "bug_category": "undefined_name",
     "buggy_line": 5
   },
   {
-    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
-    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        # return total;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 7
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        # return total;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 7
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        # return total;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 7
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num\n        }\n        return total;\n    }\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
     "bug_category": "wrong_operator",
     "buggy_line": 1
   },
   {
-    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
-    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items\n        total = total + item\n    return total",
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}",
     "bug_category": "syntax_error",
     "buggy_line": 3
   },
   {
-    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
-    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    # return total",
-    "bug_category": "missing_return",
-    "buggy_line": 5
-  },
-  {
-    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
-    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    # return total",
-    "bug_category": "missing_return",
-    "buggy_line": 5
-  },
-  {
-    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
-    "mutated_code": "def sum_list(items)\n    total = 0\n    for item in items:\n        total = total + item\n    return total",
-    "bug_category": "syntax_error",
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "bug_category": "wrong_operator",
     "buggy_line": 1
   },
   {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int_typo total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total_typo += num;\n        }\n        return total;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        # return total;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 7
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total_typo += num;\n        }\n        return total;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        # return total;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 7
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int_typo total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        # return total;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 7
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total_typo += num;\n        }\n        return total;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total_typo = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 3
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total_typo += num;\n        }\n        return total;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 5
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        # return total;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 7
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        # return total;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 7
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        # return total;\n    }\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 7
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "bug_category": "wrong_operator",
+    "buggy_line": 1
+  },
+  {
+    "language": "java",
+    "original_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total += num;\n        }\n        return total;\n    }\n}\n",
+    "mutated_code": "public class SumList {\n    public static int sum(int[] numbers) {\n        int total = 0;\n        for (int num : numbers) {\n            total_typo += num;\n        }\n        return total;\n    }\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 5
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total_typo += num;\n    }\n    return total;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 6
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "bug_category": "wrong_operator",
+    "buggy_line": 1
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total_typo += num;\n    }\n    return total;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 6
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "bug_category": "wrong_operator",
+    "buggy_line": 1
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 4
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total_typo = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 4
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int_typo total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 4
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    # return total;\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "bug_category": "wrong_operator",
+    "buggy_line": 1
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    # return total;\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 4
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    # return total;\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    # return total;\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num\n    }\n    return total;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 6
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "bug_category": "wrong_operator",
+    "buggy_line": 1
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    # return total;\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total_typo += num;\n    }\n    return total;\n}",
+    "bug_category": "undefined_name",
+    "buggy_line": 6
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "bug_category": "wrong_operator",
+    "buggy_line": 1
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    # return total;\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num\n    }\n    return total;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 6
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "bug_category": "wrong_operator",
+    "buggy_line": 1
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    # return total;\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    # return total;\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num\n    }\n    return total;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 6
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 4
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    # return total;\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    # return total;\n}",
+    "bug_category": "missing_return",
+    "buggy_line": 8
+  },
+  {
+    "language": "cpp",
+    "original_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num;\n    }\n    return total;\n}\n",
+    "mutated_code": "#include <vector>\n\nint sum_elements(const std::vector<int>& numbers) {\n    int total = 0;\n    for (int num : numbers) {\n        total += num\n    }\n    return total;\n}",
+    "bug_category": "syntax_error",
+    "buggy_line": 6
+  },
+  {
+    "language": "python",
     "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
     "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
-    "bug_category": "index_out_of_range",
+    "bug_category": "wrong_operator",
     "buggy_line": 1
   },
   {
+    "language": "python",
     "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
     "mutated_code": "def sum_list(items):\n    total_typo = 0\n    for item in items:\n        total = total + item\n    return total",
     "bug_category": "undefined_name",
     "buggy_line": 2
   },
   {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total_typo = total + item\n    return total",
+    "bug_category": "undefined_name",
+    "buggy_line": 4
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total_typo = total + item\n    return total",
+    "bug_category": "undefined_name",
+    "buggy_line": 4
+  },
+  {
+    "language": "python",
     "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
     "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items\n        total = total + item\n    return total",
     "bug_category": "syntax_error",
     "buggy_line": 3
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items)\n    total = 0\n    for item in items:\n        total = total + item\n    return total",
+    "bug_category": "syntax_error",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total_typo = 0\n    for item in items:\n        total = total + item\n    return total",
+    "bug_category": "undefined_name",
+    "buggy_line": 2
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items)\n    total = 0\n    for item in items:\n        total = total + item\n    return total",
+    "bug_category": "syntax_error",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "bug_category": "index_out_of_range",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "bug_category": "index_out_of_range",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items)\n    total = 0\n    for item in items:\n        total = total + item\n    return total",
+    "bug_category": "syntax_error",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "bug_category": "index_out_of_range",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "bug_category": "index_out_of_range",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "bug_category": "wrong_operator",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items)\n    total = 0\n    for item in items:\n        total = total + item\n    return total",
+    "bug_category": "syntax_error",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "bug_category": "wrong_operator",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total_typo = total + item\n    return total",
+    "bug_category": "undefined_name",
+    "buggy_line": 4
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    # return total",
+    "bug_category": "missing_return",
+    "buggy_line": 5
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "bug_category": "index_out_of_range",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total_typo = 0\n    for item in items:\n        total = total + item\n    return total",
+    "bug_category": "undefined_name",
+    "buggy_line": 2
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total_typo = total + item\n    return total",
+    "bug_category": "undefined_name",
+    "buggy_line": 4
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "bug_category": "index_out_of_range",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items)\n    total = 0\n    for item in items:\n        total = total + item\n    return total",
+    "bug_category": "syntax_error",
+    "buggy_line": 1
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items\n        total = total + item\n    return total",
+    "bug_category": "syntax_error",
+    "buggy_line": 3
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    # return total",
+    "bug_category": "missing_return",
+    "buggy_line": 5
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    # return total",
+    "bug_category": "missing_return",
+    "buggy_line": 5
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item_typo\n    return total",
+    "bug_category": "undefined_name",
+    "buggy_line": 4
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total_typo = 0\n    for item in items:\n        total = total + item\n    return total",
+    "bug_category": "undefined_name",
+    "buggy_line": 2
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items\n        total = total + item\n    return total",
+    "bug_category": "syntax_error",
+    "buggy_line": 3
+  },
+  {
+    "language": "python",
+    "original_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "mutated_code": "def sum_list(items):\n    total = 0\n    for item in items:\n        total = total + item\n    return total\n",
+    "bug_category": "wrong_operator",
+    "buggy_line": 1
   }
 ]

@@ -49,13 +49,15 @@ def build_synthetic_dataset(num_samples: int = 2400):
     seed_codes = []
     if os.path.exists(raw_dir):
         for fname in os.listdir(raw_dir):
-            if fname.endswith(".py"):
+            ext = os.path.splitext(fname)[1].lower()
+            lang = "python" if ext == ".py" else ("java" if ext == ".java" else ("cpp" if ext == ".cpp" else None))
+            if lang:
                 with open(os.path.join(raw_dir, fname), "r", encoding="utf-8") as f:
-                    seed_codes.append(f.read())
+                    seed_codes.append((f.read(), lang))
 
     if not seed_codes:
         seed_codes = [
-            "def sum_items(items):\n    s = 0\n    for x in items:\n        s += x\n    return s\n"
+            ("def sum_items(items):\n    s = 0\n    for x in items:\n        s += x\n    return s\n", "python")
         ]
 
     injector = BugInjector(seed=42)
@@ -67,8 +69,8 @@ def build_synthetic_dataset(num_samples: int = 2400):
 
     for cat in categories_list:
         for i in range(per_category):
-            base_code = seed_codes[i % len(seed_codes)]
-            mutated = injector.mutate_program(base_code)
+            base_code, lang = seed_codes[i % len(seed_codes)]
+            mutated = injector.mutate_program(base_code, language=lang)
             # Assign target category
             category = mutated["bug_category"]
             error_type = "SyntaxError" if category == "syntax_error" else (
