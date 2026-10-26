@@ -21,14 +21,12 @@ def test_attempt_and_hint_lifecycle():
     assert data["category"] == "syntax_error"
     assert data["buggy_line"] == 1
     assert data["current_level"] == 0
+    assert data["max_level_allowed"] == 5
 
     # 2. Unlock Level 1 (Nudge)
-    hint1_resp = client.post(f"/attempts/{attempt_id}/hint")
-    assert hint1_resp.status_code == 200
-    h1 = hint1_resp.json()
+    h1 = client.post(f"/attempts/{attempt_id}/hint").json()
     assert h1["level"] == 1
     assert h1["level_name"] == "Nudge"
-    assert "?" in h1["text"]
     hint_id = h1["hint_id"]
 
     # 3. Provide feedback on hint 1
@@ -37,26 +35,35 @@ def test_attempt_and_hint_lifecycle():
     assert fb_resp.json()["helpful"] is True
 
     # 4. Unlock Level 2 (Concept)
-    hint2_resp = client.post(f"/attempts/{attempt_id}/hint")
-    assert hint2_resp.status_code == 200
-    h2 = hint2_resp.json()
+    h2 = client.post(f"/attempts/{attempt_id}/hint").json()
     assert h2["level"] == 2
     assert h2["level_name"] == "Concept"
 
     # 5. Unlock Level 3 (Location)
-    hint3_resp = client.post(f"/attempts/{attempt_id}/hint")
-    assert hint3_resp.status_code == 200
-    h3 = hint3_resp.json()
+    h3 = client.post(f"/attempts/{attempt_id}/hint").json()
     assert h3["level"] == 3
     assert h3["level_name"] == "Location"
     assert "line 1" in h3["text"]
-    assert h3["is_last_available_level"] is True
 
-    # 6. Try to unlock beyond max -> 400 Bad Request
-    hint4_resp = client.post(f"/attempts/{attempt_id}/hint")
-    assert hint4_resp.status_code == 400
+    # 6. Unlock Level 4 (Similar Example)
+    h4 = client.post(f"/attempts/{attempt_id}/hint").json()
+    assert h4["level"] == 4
+    assert h4["level_name"] == "Similar Example"
+    assert h4["example_code"] is not None
 
-    # 7. Resolve attempt
+    # 7. Unlock Level 5 (Full Solution)
+    h5 = client.post(f"/attempts/{attempt_id}/hint").json()
+    assert h5["level"] == 5
+    assert h5["level_name"] == "Full Solution"
+    assert h5["solution_code"] is not None
+    assert "def check_even(n):" in h5["solution_code"]
+    assert h5["is_last_available_level"] is True
+
+    # 8. Try to unlock beyond level 5 -> 400 Bad Request
+    beyond = client.post(f"/attempts/{attempt_id}/hint")
+    assert beyond.status_code == 400
+
+    # 9. Resolve attempt
     resolve_resp = client.post(
         f"/attempts/{attempt_id}/resolve",
         json={"reflection": "Forgot the colon at the end of the def statement."},

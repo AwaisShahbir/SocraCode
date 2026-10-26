@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field
 
 from app.parser import parse_python_error
 from app.rules import match_python_rules
+from app.ml.classifier import classify_bug
 from app.hints import LevelGate, LevelGateError, UnlockedHint
 from app.db.repository import AttemptRepository
 
@@ -48,7 +49,7 @@ class FeedbackRequest(BaseModel):
 
 @router.post("/attempts", response_model=AttemptResponse, status_code=status.HTTP_201_CREATED)
 def create_attempt(req: CreateAttemptRequest) -> AttemptResponse:
-    """Analyze code failure, match bug category, and initialize a student attempt."""
+    """Analyze code failure using rules and ML classifier, and initialize a student attempt."""
     if req.language.lower().strip() != "python":
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -59,21 +60,28 @@ def create_attempt(req: CreateAttemptRequest) -> AttemptResponse:
     parsed = parse_python_error(req.code, req.error_text, timed_out=req.timed_out)
 
     # 2. Rule matching
-    matched = match_python_rules(req.code, parsed)
+    rule_match = match_python_rules(req.code, parsed)
 
-    # 3. Create persistent record
+    # 3. Custom ML Classifier inference
+    ml_category, ml_conf, is_low_conf = classify_bug(req.code, parsed.error_type, parsed.message)
+
+    # Combine: rule-based match takes priority for clear syntax/tracebacks, ML reinforces or provides confidence
+    final_category = rule_match.category.value
+    final_confidence = rule_match.confidence if rule_match.confidence >= 0.9 else ml_conf
+
+    # 4. Create persistent record (max_level_allowed=5 for Step 3 Full Ladder)
     attempt = repo.create_attempt(
         language=req.language,
         source=req.source,
         code=req.code,
         error_text=req.error_text,
-        category=matched.category.value,
-        concept=matched.concept,
-        buggy_line=matched.line_number,
-        confidence=matched.confidence,
+        category=final_category,
+        concept=rule_match.concept,
+        buggy_line=rule_match.line_number,
+        confidence=final_confidence,
         user_id=req.user_id,
         assignment_id=req.assignment_id,
-        max_level_allowed=3,  # Capped at Level 3 for Step 2
+        max_level_allowed=5,
     )
 
     return AttemptResponse(**attempt)

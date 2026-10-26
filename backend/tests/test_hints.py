@@ -36,10 +36,10 @@ def test_leak_check_levels_1_to_3():
                 )
 
 
-def test_level_gate_sequential_progression():
-    """Test that LevelGate enforces unlocking 1 -> 2 -> 3 strictly in order."""
+def test_level_gate_full_five_levels_progression():
+    """Test that LevelGate enforces unlocking 1 -> 2 -> 3 -> 4 -> 5 strictly in order."""
     with tempfile.TemporaryDirectory() as tmpdir:
-        db_path = os.path.join(tmpdir, "test_hints.db")
+        db_path = os.path.join(tmpdir, "test_hints_5.db")
         init_db(db_path)
         repo = AttemptRepository(db_path=db_path)
         gate = LevelGate(repository=repo)
@@ -47,36 +47,48 @@ def test_level_gate_sequential_progression():
         attempt = repo.create_attempt(
             language="python",
             source="web",
-            code="print(x)",
-            error_text="NameError: name 'x' is not defined",
-            category=BugCategory.UNDEFINED_NAME.value,
-            concept="variable_scope_and_declaration",
+            code="def add(a, b)\n    return a + b",
+            error_text="SyntaxError: expected ':'",
+            category=BugCategory.SYNTAX_ERROR.value,
+            concept="syntax_rules",
             buggy_line=1,
             confidence=1.0,
-            max_level_allowed=3,
+            max_level_allowed=5,
         )
         attempt_id = attempt["id"]
         assert attempt["current_level"] == 0
 
-        # 1. Unlock Level 1 (Nudge)
-        hint_1 = gate.unlock_next_hint(attempt_id)
-        assert hint_1.level == 1
-        assert hint_1.level_name == "Nudge"
-        assert "?" in hint_1.text
+        # Level 1: Nudge
+        h1 = gate.unlock_next_hint(attempt_id)
+        assert h1.level == 1
+        assert h1.level_name == "Nudge"
+        assert "?" in h1.text
 
-        # 2. Unlock Level 2 (Concept)
-        hint_2 = gate.unlock_next_hint(attempt_id)
-        assert hint_2.level == 2
-        assert hint_2.level_name == "Concept"
-        assert "Variable Scope" in hint_2.text
+        # Level 2: Concept
+        h2 = gate.unlock_next_hint(attempt_id)
+        assert h2.level == 2
+        assert h2.level_name == "Concept"
 
-        # 3. Unlock Level 3 (Location)
-        hint_3 = gate.unlock_next_hint(attempt_id)
-        assert hint_3.level == 3
-        assert hint_3.level_name == "Location"
-        assert "line 1" in hint_3.text
-        assert hint_3.is_last_available_level is True
+        # Level 3: Location
+        h3 = gate.unlock_next_hint(attempt_id)
+        assert h3.level == 3
+        assert h3.level_name == "Location"
+        assert "line 1" in h3.text
 
-        # 4. Attempt to unlock Level 4 when max is 3 -> LevelGateError
+        # Level 4: Similar Example
+        h4 = gate.unlock_next_hint(attempt_id)
+        assert h4.level == 4
+        assert h4.level_name == "Similar Example"
+        assert h4.example_code is not None
+
+        # Level 5: Full Solution
+        h5 = gate.unlock_next_hint(attempt_id)
+        assert h5.level == 5
+        assert h5.level_name == "Full Solution"
+        assert h5.solution_code is not None
+        assert "def add(a, b):" in h5.solution_code
+        assert h5.is_last_available_level is True
+
+        # Beyond level 5 -> LevelGateError
         with pytest.raises(LevelGateError):
             gate.unlock_next_hint(attempt_id)
