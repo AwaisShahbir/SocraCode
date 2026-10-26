@@ -3,6 +3,22 @@
 All notable changes to SocraCode will be documented in this file.
 The format is based on Keep a Changelog.
 
+## [Step 4] - Weeks 8-9: Java and C++ Multi-Language Support - 2026-10-26
+
+### Added
+- Multi-language code execution in runner (`backend/app/runner/local_runner.py` and `backend/app/api/routes_run.py`) supporting Python, Java, and C++.
+- Unified error parser dispatch (`backend/app/parser/__init__.py`) routing to `JavaErrorParser` (javac compiler errors & JVM stack traces) and `CppErrorParser` (GCC/Clang diagnostics & runtime faults).
+- Java and C++ expert rule engines (`backend/app/rules/java_rules.py` and `backend/app/rules/cpp_rules.py`) mapping failure diagnostics to all 8 canonical bug categories.
+- Canonical hint templates for Java (`backend/app/hints/templates_java.py`) and C++ (`backend/app/hints/templates_cpp.py`) with zero code leak verification for Levels 1–3.
+- Language-aware hint template hydration and identifier extraction (`backend/app/hints/level_gate.py`).
+- Multi-language Level 4 TF-IDF worked example retrieval (`backend/app/retrieval/tfidf_matcher.py` & `examples_library.py`) returning idiomatically correct parallel examples per language.
+- Deterministic Level 5 fix synthesis for Java and C++ (`backend/app/rules/fixer.py`) with honest fallback for unverified bugs.
+- Multi-language synthetic bug dataset and generation pipeline (`ml/data/raw/`, `ml/scripts/generate_bugs.py`, `ml/scripts/train.py`) training PyTorch neural network and Scikit-Learn baseline on multi-language corpus.
+- Interactive multi-language switcher in frontend header (`web/src/components/Header.tsx`) with segmented buttons for Python, Java, and C++.
+- Curated sample bug challenge presets for Python, Java, and C++ (`web/src/App.tsx`).
+- Dynamic Monaco Editor syntax highlighting and tab label synchronization per language (`web/src/features/editor/CodeEditor.tsx`).
+- 51 passing unit and integration tests across runner, parsers, rules, leak checks, retrieval, fixer, classifier, and attempts API.
+
 ## [Step 3] - Weeks 6-7: Full Ladder & Classifier - 2026-10-26
 
 ### Added
