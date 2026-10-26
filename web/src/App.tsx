@@ -303,11 +303,12 @@ export const App: React.FC = () => {
             <HintLadderPanel
               unlockedHints={unlockedHints}
               currentLevel={activeAttempt ? activeAttempt.current_level : 0}
-              maxLevelAllowed={3}
+              maxLevelAllowed={activeAttempt ? activeAttempt.max_level_allowed : 5}
               hasActiveAttempt={Boolean(activeAttempt)}
               isLoadingHint={isLoadingHint}
               onGetNextHint={handleGetNextHint}
               onSelectLine={(line) => setHighlightedLine(line)}
+              onApplySolution={(fixedCode) => setCode(fixedCode)}
               onFeedback={handleFeedback}
             />
           </div>

@@ -35,6 +35,10 @@ export interface UnlockedHint {
   shown_at: string;
   is_last_available_level: boolean;
   hint_id: string;
+  example_code?: string | null;
+  solution_code?: string | null;
+  explanation?: string | null;
+  diff_summary?: string | null;
 }
 
 export type ThemeMode = 'light' | 'dark' | 'system';

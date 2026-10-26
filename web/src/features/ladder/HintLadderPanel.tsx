@@ -12,6 +12,9 @@ import {
   ThumbsDown,
   Check,
   Loader2,
+  Copy,
+  ArrowRight,
+  AlertCircle,
 } from 'lucide-react';
 import type { UnlockedHint } from '../../types/runner';
 
@@ -23,6 +26,7 @@ interface HintLadderPanelProps {
   isLoadingHint: boolean;
   onGetNextHint: () => void;
   onSelectLine?: (line: number) => void;
+  onApplySolution?: (code: string) => void;
   onFeedback: (hintId: string, helpful: boolean) => void;
 }
 
@@ -34,10 +38,13 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
   isLoadingHint,
   onGetNextHint,
   onSelectLine,
+  onApplySolution,
   onFeedback,
 }) => {
   const [expandedLevels, setExpandedLevels] = useState<Record<number, boolean>>({});
   const [feedbackSent, setFeedbackSent] = useState<Record<string, boolean>>({});
+  const [showConfirmLevel5, setShowConfirmLevel5] = useState<boolean>(false);
+  const [copiedLevel5, setCopiedLevel5] = useState<boolean>(false);
 
   const ladderDefinitions = [
     { level: 1, title: 'Nudge', subtitle: 'Guiding question', icon: HelpCircle },
@@ -57,6 +64,20 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
   const handleFeedbackClick = (hintId: string, helpful: boolean) => {
     onFeedback(hintId, helpful);
     setFeedbackSent((prev) => ({ ...prev, [hintId]: true }));
+  };
+
+  const handlePrimaryAction = () => {
+    if (currentLevel === 4) {
+      // Trigger confirmation dialog before showing full solution
+      setShowConfirmLevel5(true);
+    } else {
+      onGetNextHint();
+    }
+  };
+
+  const confirmShowSolution = () => {
+    setShowConfirmLevel5(false);
+    onGetNextHint();
   };
 
   const canRequestNext = hasActiveAttempt && currentLevel < maxLevelAllowed && !isLoadingHint;
@@ -97,7 +118,7 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
           </span>
         </div>
         <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginTop: '2px' }}>
-          Socratic guidance that helps you debug step by step.
+          Socratic guidance from guiding question to verified solution.
         </p>
       </div>
 
@@ -230,7 +251,7 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
                       }}
                     >
                       <Lock size={12} />
-                      <span>{step.level <= 3 ? `Unlocks after L${step.level - 1}` : 'Unlocks in Step 3'}</span>
+                      <span>Unlocks after L{step.level - 1}</span>
                     </div>
                   )}
                 </div>
@@ -245,17 +266,20 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
                     backgroundColor: 'var(--color-surface)',
                   }}
                 >
-                  <p
-                    style={{
-                      fontSize: 'var(--font-size-sm)',
-                      lineHeight: '1.5',
-                      color: 'var(--color-text)',
-                    }}
-                  >
-                    {hint.text}
-                  </p>
+                  {/* General / Level 1-3 Text */}
+                  {step.level <= 3 && (
+                    <p
+                      style={{
+                        fontSize: 'var(--font-size-sm)',
+                        lineHeight: '1.5',
+                        color: 'var(--color-text)',
+                      }}
+                    >
+                      {hint.text}
+                    </p>
+                  )}
 
-                  {/* Location Action Helper for Level 3 */}
+                  {/* Level 3: Location line highlight trigger */}
                   {step.level === 3 && onSelectLine && (
                     <button
                       type="button"
@@ -283,6 +307,144 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
                       <MapPin size={12} />
                       <span>Highlight line in editor</span>
                     </button>
+                  )}
+
+                  {/* Level 4: Worked Example Code Block */}
+                  {step.level === 4 && (
+                    <div>
+                      <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text)', marginBottom: 'var(--space-2)' }}>
+                        Here is a parallel worked example demonstrating the correct pattern on different data:
+                      </p>
+                      {hint.example_code && (
+                        <pre
+                          style={{
+                            padding: 'var(--space-3)',
+                            backgroundColor: 'var(--color-code-bg)',
+                            color: 'var(--color-text)',
+                            fontFamily: 'var(--font-mono)',
+                            fontSize: 'var(--font-size-xs)',
+                            borderRadius: 'var(--radius-control)',
+                            border: '1px solid var(--color-border)',
+                            overflowX: 'auto',
+                            lineHeight: '1.4',
+                          }}
+                        >
+                          <code>{hint.example_code}</code>
+                        </pre>
+                      )}
+                      {hint.explanation && (
+                        <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginTop: 'var(--space-2)' }}>
+                          <strong>Pattern Note:</strong> {hint.explanation}
+                        </p>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Level 5: Full Solution */}
+                  {step.level === 5 && (
+                    <div>
+                      {hint.solution_code ? (
+                        <div>
+                          {hint.diff_summary && (
+                            <div
+                              style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '4px',
+                                padding: '2px 8px',
+                                backgroundColor: 'rgba(31, 122, 77, 0.1)',
+                                color: 'var(--color-success)',
+                                borderRadius: 'var(--radius-control)',
+                                fontSize: '11px',
+                                fontWeight: 600,
+                                marginBottom: 'var(--space-2)',
+                              }}
+                            >
+                              <Check size={12} />
+                              <span>{hint.diff_summary}</span>
+                            </div>
+                          )}
+
+                          <pre
+                            style={{
+                              padding: 'var(--space-3)',
+                              backgroundColor: 'var(--color-code-bg)',
+                              color: 'var(--color-text)',
+                              fontFamily: 'var(--font-mono)',
+                              fontSize: 'var(--font-size-xs)',
+                              borderRadius: 'var(--radius-control)',
+                              border: '1px solid var(--color-border)',
+                              overflowX: 'auto',
+                              lineHeight: '1.4',
+                              maxHeight: '200px',
+                            }}
+                          >
+                            <code>{hint.solution_code}</code>
+                          </pre>
+
+                          <div style={{ display: 'flex', gap: 'var(--space-2)', marginTop: 'var(--space-2)' }}>
+                            {onApplySolution && (
+                              <button
+                                type="button"
+                                onClick={() => onApplySolution(hint.solution_code!)}
+                                style={{
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: '4px',
+                                  padding: '5px 10px',
+                                  backgroundColor: 'var(--color-accent)',
+                                  color: 'var(--color-on-accent)',
+                                  border: 'none',
+                                  borderRadius: 'var(--radius-control)',
+                                  fontSize: 'var(--font-size-xs)',
+                                  fontWeight: 600,
+                                  cursor: 'pointer',
+                                }}
+                              >
+                                <ArrowRight size={12} />
+                                <span>Apply Fix to Editor</span>
+                              </button>
+                            )}
+                            <button
+                              type="button"
+                              onClick={() => {
+                                navigator.clipboard.writeText(hint.solution_code!);
+                                setCopiedLevel5(true);
+                                setTimeout(() => setCopiedLevel5(false), 2000);
+                              }}
+                              style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '4px',
+                                padding: '5px 10px',
+                                backgroundColor: 'var(--color-surface-raised)',
+                                color: 'var(--color-text)',
+                                border: '1px solid var(--color-border)',
+                                borderRadius: 'var(--radius-control)',
+                                fontSize: 'var(--font-size-xs)',
+                                cursor: 'pointer',
+                              }}
+                            >
+                              <Copy size={12} />
+                              <span>{copiedLevel5 ? 'Copied!' : 'Copy Code'}</span>
+                            </button>
+                          </div>
+
+                          {hint.explanation && (
+                            <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginTop: 'var(--space-2)' }}>
+                              <strong>Why this fix works:</strong> {hint.explanation}
+                            </p>
+                          )}
+                        </div>
+                      ) : (
+                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-2)', padding: 'var(--space-2)', backgroundColor: 'var(--color-code-bg)', borderRadius: 'var(--radius-control)' }}>
+                          <AlertCircle size={15} style={{ color: 'var(--color-warning)', flexShrink: 0, marginTop: '2px' }} />
+                          <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)' }}>
+                            SocraCode can't verify a full fix for this bug with certainty. Review the worked example in Level 4 or consult your course instructor.
+                          </p>
+                        </div>
+                      )}
+                    </div>
                   )}
 
                   {/* Feedback Bar */}
@@ -363,7 +525,7 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
       >
         <button
           type="button"
-          onClick={onGetNextHint}
+          onClick={handlePrimaryAction}
           disabled={!canRequestNext}
           title="Unlock next pedagogical hint (Ctrl+Shift+H)"
           style={{
@@ -392,14 +554,89 @@ export const HintLadderPanel: React.FC<HintLadderPanelProps> = ({
           ) : !hasActiveAttempt ? (
             <span>Run code to unlock hints on error</span>
           ) : currentLevel >= maxLevelAllowed ? (
-            <span>All Step 2 hints unlocked (Level 3 reached)</span>
+            <span>Full Solution Reached</span>
           ) : currentLevel === 0 ? (
             <span>Get Hint (Level 1: Nudge)</span>
+          ) : currentLevel === 4 ? (
+            <span>Show Full Solution (Level 5)</span>
           ) : (
             <span>Get Next Hint (Level {currentLevel + 1})</span>
           )}
         </button>
       </div>
+
+      {/* Level 5 Confirmation Modal */}
+      {showConfirmLevel5 && (
+        <div
+          role="dialog"
+          aria-labelledby="confirm-solution-title"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 100,
+            padding: 'var(--space-4)',
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: 'var(--color-surface)',
+              border: '1px solid var(--color-border)',
+              borderRadius: 'var(--radius-container)',
+              padding: 'var(--space-6)',
+              maxWidth: '440px',
+              width: '100%',
+              boxShadow: 'var(--shadow-floating)',
+            }}
+          >
+            <h3 id="confirm-solution-title" style={{ fontSize: 'var(--font-size-md)', fontWeight: 700 }}>
+              Show Full Solution?
+            </h3>
+            <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-muted)', marginTop: 'var(--space-2)', lineHeight: '1.5' }}>
+              Trying to fix the code yourself first reinforces deeper understanding and problem-solving skill.
+              Are you sure you want to view the complete solution?
+            </p>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-2)', marginTop: 'var(--space-4)' }}>
+              <button
+                type="button"
+                autoFocus
+                onClick={() => setShowConfirmLevel5(false)}
+                style={{
+                  padding: '8px 16px',
+                  backgroundColor: 'var(--color-accent)',
+                  color: 'var(--color-on-accent)',
+                  border: 'none',
+                  borderRadius: 'var(--radius-control)',
+                  fontSize: 'var(--font-size-xs)',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                }}
+              >
+                Keep Trying
+              </button>
+              <button
+                type="button"
+                onClick={confirmShowSolution}
+                style={{
+                  padding: '8px 14px',
+                  backgroundColor: 'transparent',
+                  color: 'var(--color-danger)',
+                  border: '1px solid var(--color-danger)',
+                  borderRadius: 'var(--radius-control)',
+                  fontSize: 'var(--font-size-xs)',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                }}
+              >
+                Show Solution
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
