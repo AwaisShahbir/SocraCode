@@ -64,12 +64,12 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
-        backgroundColor: 'var(--color-surface)',
+        backgroundColor: resolvedTheme === 'dark' ? '#1e1e1e' : '#ffffff',
         borderRight: '1px solid var(--color-border)',
         overflow: 'hidden',
       }}
     >
-      {/* Sleek Modern Tab Bar */}
+      {/* Tab Bar */}
       <div
         style={{
           display: 'flex',
@@ -90,7 +90,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
               alignItems: 'center',
               gap: '6px',
               padding: '6px 12px',
-              backgroundColor: 'var(--color-surface)',
+              backgroundColor: resolvedTheme === 'dark' ? '#1e1e1e' : '#ffffff',
               borderTop: '2px solid var(--color-accent)',
               borderLeft: '1px solid var(--color-border)',
               borderRight: '1px solid var(--color-border)',
@@ -177,7 +177,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
           defaultLanguage="python"
           value={code}
           onChange={(val) => onChange(val || '')}
-          theme={resolvedTheme === 'dark' ? 'vs-dark' : 'light'}
+          theme={resolvedTheme === 'dark' ? 'vs-dark' : 'vs'}
           onMount={handleEditorDidMount}
           options={{
             fontSize: 14,
@@ -190,8 +190,10 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
             wordWrap: 'on',
             automaticLayout: true,
             padding: { top: 14, bottom: 14 },
-            cursorBlinking: 'smooth',
+            cursorBlinking: 'blink',
             cursorSmoothCaretAnimation: 'on',
+            cursorStyle: 'line',
+            cursorWidth: 3,
             renderLineHighlight: 'all',
           }}
         />

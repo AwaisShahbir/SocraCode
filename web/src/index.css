@@ -218,3 +218,23 @@ button {
 button:active {
   transform: scale(0.98);
 }
+
+/* Ensure Monaco Editor Cursor is Always High-Contrast and Clearly Visible */
+.monaco-editor .cursors-layer .cursor {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  width: 3px !important;
+}
+
+[data-theme="light"] .monaco-editor .cursors-layer .cursor {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.8) !important;
+}
+
+[data-theme="dark"] .monaco-editor .cursors-layer .cursor {
+  background-color: #FFFFFF !important;
+  border-color: #FFFFFF !important;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8) !important;
+}
