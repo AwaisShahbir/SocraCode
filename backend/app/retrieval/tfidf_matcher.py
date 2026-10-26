@@ -22,9 +22,10 @@ class TFIDFExampleRetriever:
         category: BugCategory,
         student_code: str,
         error_text: str = "",
+        language: str = "python",
     ) -> WorkedExample:
-        """Find the most similar worked example matching the bug category."""
-        category_examples = get_examples_by_category(category)
+        """Find the most similar worked example matching the bug category and language."""
+        category_examples = get_examples_by_category(category, language=language)
         if not category_examples:
             # Fallback to first available example if category not found
             return self.examples[0]
@@ -52,6 +53,9 @@ class TFIDFExampleRetriever:
 _default_retriever = TFIDFExampleRetriever()
 
 def retrieve_worked_example(
-    category: BugCategory, student_code: str, error_text: str = ""
+    category: BugCategory,
+    student_code: str,
+    error_text: str = "",
+    language: str = "python",
 ) -> WorkedExample:
-    return _default_retriever.retrieve(category, student_code, error_text)
+    return _default_retriever.retrieve(category, student_code, error_text, language=language)

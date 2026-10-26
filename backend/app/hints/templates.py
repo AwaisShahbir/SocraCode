@@ -55,8 +55,16 @@ HINT_TEMPLATES_PYTHON: Dict[BugCategory, Dict[int, str]] = {
 }
 
 
-def get_template(category: BugCategory, level: int) -> str:
-    """Retrieve raw template for category and level."""
+def get_template(category: BugCategory, level: int, language: str = "python") -> str:
+    """Retrieve raw template for category, level, and language."""
+    norm = language.lower().strip()
+    if norm == "java":
+        from app.hints.templates_java import get_template_java
+        return get_template_java(category, level)
+    elif norm in ("cpp", "c++"):
+        from app.hints.templates_cpp import get_template_cpp
+        return get_template_cpp(category, level)
+
     category_templates = HINT_TEMPLATES_PYTHON.get(category, HINT_TEMPLATES_PYTHON[BugCategory.SYNTAX_ERROR])
     return category_templates.get(
         level,

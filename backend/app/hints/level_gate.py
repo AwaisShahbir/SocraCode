@@ -69,9 +69,10 @@ class LevelGate:
         explanation = None
         diff_summary = None
 
+        language = attempt.get("language", "python")
         if target_level <= 3:
             # Hydrate template for Levels 1 to 3
-            raw_template = get_template(category, target_level)
+            raw_template = get_template(category, target_level, language=language)
             undefined_name = "variable"
             error_text = attempt.get("error_text", "")
             if "name '" in error_text:
@@ -79,6 +80,16 @@ class LevelGate:
                     undefined_name = error_text.split("name '")[1].split("'")[0]
                 except Exception:
                     pass
+            elif "symbol:" in error_text:
+                import re
+                sym_match = re.search(r"symbol:\s*(?:variable|method)\s+([A-Za-z0-9_]+)", error_text)
+                if sym_match:
+                    undefined_name = sym_match.group(1)
+            elif "not declared" in error_text:
+                import re
+                sym_match = re.search(r"['‘]([A-Za-z0-9_]+)['’]\s+(?:was\s+)?not\s+declared", error_text)
+                if sym_match:
+                    undefined_name = sym_match.group(1)
 
             hydrated_text = raw_template.format(
                 line_number=attempt["buggy_line"],
@@ -90,6 +101,7 @@ class LevelGate:
                 category=category,
                 student_code=attempt["code"],
                 error_text=attempt.get("error_text", ""),
+                language=language,
             )
             example_code = example.code
             explanation = example.explanation
@@ -111,12 +123,23 @@ class LevelGate:
                     context["undefined_name"] = error_text.split("name '")[1].split("'")[0]
                 except Exception:
                     pass
+            elif "symbol:" in error_text:
+                import re
+                sym_match = re.search(r"symbol:\s*(?:variable|method)\s+([A-Za-z0-9_]+)", error_text)
+                if sym_match:
+                    context["undefined_name"] = sym_match.group(1)
+            elif "not declared" in error_text:
+                import re
+                sym_match = re.search(r"['‘]([A-Za-z0-9_]+)['’]\s+(?:was\s+)?not\s+declared", error_text)
+                if sym_match:
+                    context["undefined_name"] = sym_match.group(1)
 
             fix_result = self.fixer.generate_fix(
                 code=attempt["code"],
                 category=category,
                 buggy_line=attempt["buggy_line"],
                 context=context,
+                language=language,
             )
 
             if fix_result.can_fix and fix_result.fixed_code:
