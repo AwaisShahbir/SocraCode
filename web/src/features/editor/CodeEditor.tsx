@@ -7,6 +7,8 @@ interface CodeEditorProps {
   code: string;
   onChange: (value: string) => void;
   resolvedTheme: 'light' | 'dark';
+  language?: string;
+  fileName?: string;
   onRunShortcut?: () => void;
   isRunning?: boolean;
   highlightedLine?: number | null;
@@ -16,6 +18,8 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
   code,
   onChange,
   resolvedTheme,
+  language = 'python',
+  fileName,
   onRunShortcut,
   isRunning = false,
   highlightedLine = null,
@@ -102,7 +106,9 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
             }}
           >
             <FileCode2 size={15} color="var(--color-accent)" />
-            <span>factorial.py</span>
+            <span>
+              {fileName || (language === 'java' ? 'Solution.java' : language === 'cpp' ? 'solution.cpp' : 'solution.py')}
+            </span>
           </div>
 
           {highlightedLine && (
@@ -174,7 +180,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
       <div style={{ flex: 1, minHeight: 0 }}>
         <Editor
           height="100%"
-          defaultLanguage="python"
+          language={language === 'cpp' ? 'cpp' : (language === 'java' ? 'java' : 'python')}
           value={code}
           onChange={(val) => onChange(val || '')}
           theme={resolvedTheme === 'dark' ? 'vs-dark' : 'vs'}

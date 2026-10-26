@@ -1,13 +1,20 @@
 import React from 'react';
-import { Sun, Moon, Monitor, Sparkles, Terminal, Flame, ShieldCheck } from 'lucide-react';
-import type { ThemeMode } from '../types/runner';
+import { Sun, Moon, Monitor, Sparkles, Terminal, Flame, ShieldCheck, Code2 } from 'lucide-react';
+import type { ThemeMode, SupportedLanguage } from '../types/runner';
 
 interface HeaderProps {
   themeMode: ThemeMode;
   onThemeChange: (mode: ThemeMode) => void;
+  language: SupportedLanguage;
+  onLanguageChange: (lang: SupportedLanguage) => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ themeMode, onThemeChange }) => {
+export const Header: React.FC<HeaderProps> = ({
+  themeMode,
+  onThemeChange,
+  language,
+  onLanguageChange,
+}) => {
   return (
     <header
       style={{
@@ -118,23 +125,55 @@ export const Header: React.FC<HeaderProps> = ({ themeMode, onThemeChange }) => {
 
       {/* Controls & Tools */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
-        {/* Language Badge */}
+        {/* Language Segmented Selector */}
         <div
+          role="group"
+          aria-label="Programming Language"
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '6px',
-            padding: '4px 10px',
             background: 'var(--color-surface-raised)',
             border: '1px solid var(--color-border)',
-            borderRadius: 'var(--radius-control)',
-            fontSize: '13px',
-            fontWeight: 600,
-            color: 'var(--color-text)',
+            borderRadius: 'var(--radius-pill)',
+            padding: '3px',
+            gap: '2px',
           }}
         >
-          <Terminal size={14} color="var(--color-accent)" />
-          <span>Python 3.13</span>
+          {(
+            [
+              { id: 'python', label: 'Python' },
+              { id: 'java', label: 'Java' },
+              { id: 'cpp', label: 'C++' },
+            ] as const
+          ).map((item) => {
+            const isSelected = language === item.id;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => onLanguageChange(item.id)}
+                aria-pressed={isSelected}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  padding: '3px 10px',
+                  fontSize: '12px',
+                  fontWeight: isSelected ? 700 : 500,
+                  border: 'none',
+                  borderRadius: 'var(--radius-pill)',
+                  backgroundColor: isSelected ? 'var(--color-accent)' : 'transparent',
+                  color: isSelected ? '#FFFFFF' : 'var(--color-text-muted)',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                  boxShadow: isSelected ? '0 2px 8px rgba(99, 102, 241, 0.3)' : 'none',
+                }}
+              >
+                {item.id === 'python' ? <Terminal size={12} /> : <Code2 size={12} />}
+                <span>{item.label}</span>
+              </button>
+            );
+          })}
         </div>
 
         {/* Security / Privacy Badge */}

@@ -6,20 +6,25 @@ import { CodeEditor } from './features/editor/CodeEditor';
 import { OutputConsole } from './features/output/OutputConsole';
 import { HintLadderPanel } from './features/ladder/HintLadderPanel';
 import { executeRun, createAttempt, requestNextHint, resolveAttempt, sendHintFeedback } from './lib/api';
-import type { Attempt, RunResult, UnlockedHint } from './types/runner';
+import type { Attempt, RunResult, UnlockedHint, SupportedLanguage } from './types/runner';
 
 interface BugPreset {
   id: string;
   name: string;
+  language: SupportedLanguage;
   category: string;
+  fileName: string;
   code: string;
 }
 
 const BUG_PRESETS: BugPreset[] = [
+  // --- PYTHON CHALLENGES ---
   {
-    id: 'syntax_colon',
+    id: 'py_syntax_colon',
     name: 'Factorial (SyntaxError: Missing Colon)',
+    language: 'python',
     category: 'Syntax Error',
+    fileName: 'factorial.py',
     code: `# Welcome to SocraCode - Socratic AI Debugging Tutor
 # Challenge: Factorial implementation with syntax bug on line 7
 # Run the code, observe the error, and climb the Hint Ladder!
@@ -42,9 +47,11 @@ for num in numbers:
 `,
   },
   {
-    id: 'undefined_typo',
+    id: 'py_undefined_typo',
     name: 'Counter (NameError: Undefined Typo)',
+    language: 'python',
     category: 'Undefined Name',
+    fileName: 'counter.py',
     code: `# Challenge: Tracking user visits with counter
 # Run the code to diagnose the undefined variable bug!
 
@@ -59,9 +66,11 @@ print("Total site visits:", record_visits())
 `,
   },
   {
-    id: 'index_bounds',
+    id: 'py_index_bounds',
     name: 'Scores Average (IndexError: Off-by-one)',
+    language: 'python',
     category: 'Index Error',
+    fileName: 'scores.py',
     code: `# Challenge: Compute high score average
 # Watch out for list index bounds!
 
@@ -75,9 +84,11 @@ print("Top score is:", get_top_score(student_scores))
 `,
   },
   {
-    id: 'infinite_loop',
+    id: 'py_infinite_loop',
     name: 'Countdown Timer (Timeout Loop)',
+    language: 'python',
     category: 'Loop Boundary',
+    fileName: 'countdown.py',
     code: `# Challenge: Countdown timer
 # Beware of missing iteration state!
 
@@ -92,11 +103,213 @@ countdown(3)
 print("Blast off!")
 `,
   },
+
+  // --- JAVA CHALLENGES ---
+  {
+    id: 'java_syntax_semicolon',
+    name: 'Factorial (SyntaxError: Missing Semicolon)',
+    language: 'java',
+    category: 'Syntax Error',
+    fileName: 'Solution.java',
+    code: `// Welcome to SocraCode - Socratic AI Debugging Tutor (Java)
+// Challenge: Factorial method with missing statement terminator
+// Run the code, observe the compiler error, and climb the Hint Ladder!
+
+public class Solution {
+    public static int calculateFactorial(int n) {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative numbers not allowed");
+        }
+        int result = 1;
+        for (int i = 1; i <= n; i++) {
+            result *= i // Missing semicolon on line 12!
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("5! = " + calculateFactorial(5));
+    }
+}
+`,
+  },
+  {
+    id: 'java_undefined_typo',
+    name: 'Score Calculator (Cannot Find Symbol)',
+    language: 'java',
+    category: 'Undefined Name',
+    fileName: 'Solution.java',
+    code: `// Challenge: Compute user total bonus score in Java
+// Run the code to diagnose the undefined identifier!
+
+public class Solution {
+    public static int computeScore(int baseScore) {
+        int bonusPoints = 15;
+        // Typo in identifier name
+        int finalScore = baseScore + bousPoints;
+        return finalScore;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Total score: " + computeScore(100));
+    }
+}
+`,
+  },
+  {
+    id: 'java_index_bounds',
+    name: 'Top Score (ArrayIndexOutOfBounds)',
+    language: 'java',
+    category: 'Index Error',
+    fileName: 'Solution.java',
+    code: `// Challenge: Access top score from array in Java
+// Watch out for 0-indexed boundaries!
+
+public class Solution {
+    public static int getTopScore(int[] scores) {
+        // Accessing scores[scores.length] throws ArrayIndexOutOfBoundsException
+        return scores[scores.length];
+    }
+
+    public static void main(String[] args) {
+        int[] scores = {88, 92, 79, 95};
+        System.out.println("Top score is: " + getTopScore(scores));
+    }
+}
+`,
+  },
+  {
+    id: 'java_loop_timeout',
+    name: 'Countdown Timer (Loop Timeout)',
+    language: 'java',
+    category: 'Loop Boundary',
+    fileName: 'Solution.java',
+    code: `// Challenge: Countdown Timer in Java
+// Beware of missing loop counter update!
+
+public class Solution {
+    public static void countdown(int start) {
+        int count = start;
+        while (count > 0) {
+            System.out.println("T-minus " + count);
+            // Forgot to decrement count!
+        }
+    }
+
+    public static void main(String[] args) {
+        countdown(3);
+    }
+}
+`,
+  },
+
+  // --- C++ CHALLENGES ---
+  {
+    id: 'cpp_syntax_semicolon',
+    name: 'Factorial (SyntaxError: Missing Semicolon)',
+    language: 'cpp',
+    category: 'Syntax Error',
+    fileName: 'solution.cpp',
+    code: `// Welcome to SocraCode - Socratic AI Debugging Tutor (C++)
+// Challenge: Factorial function with missing statement delimiter
+// Run the code, observe the diagnostic, and climb the Hint Ladder!
+
+#include <iostream>
+
+int calculate_factorial(int n) {
+    if (n < 0) return -1;
+    int result = 1;
+    for (int i = 1; i <= n; i++) {
+        result *= i // Missing semicolon on line 11!
+    }
+    return result;
+}
+
+int main() {
+    std::cout << "5! = " << calculate_factorial(5) << std::endl;
+    return 0;
+}
+`,
+  },
+  {
+    id: 'cpp_undefined_typo',
+    name: 'Score Calculator (Not Declared in Scope)',
+    language: 'cpp',
+    category: 'Undefined Name',
+    fileName: 'solution.cpp',
+    code: `// Challenge: Compute user total bonus score in C++
+// Run the code to diagnose the undeclared identifier!
+
+#include <iostream>
+
+int compute_score(int base_score) {
+    int bonus_points = 25;
+    // Typo in identifier name
+    int total = base_score + bns_points;
+    return total;
+}
+
+int main() {
+    std::cout << "Total score: " << compute_score(100) << std::endl;
+    return 0;
+}
+`,
+  },
+  {
+    id: 'cpp_vector_bounds',
+    name: 'Vector Boundary (Index Out of Bounds)',
+    language: 'cpp',
+    category: 'Index Error',
+    fileName: 'solution.cpp',
+    code: `// Challenge: Access back element of a vector in C++
+// Watch out for 0-indexed container bounds!
+
+#include <iostream>
+#include <vector>
+
+int get_top_score(const std::vector<int>& scores) {
+    // Accessing index equal to size
+    return scores.at(scores.size());
+}
+
+int main() {
+    std::vector<int> scores = {88, 92, 79, 95};
+    std::cout << "Top score is: " << get_top_score(scores) << std::endl;
+    return 0;
+}
+`,
+  },
+  {
+    id: 'cpp_loop_timeout',
+    name: 'Countdown Timer (Loop Timeout)',
+    language: 'cpp',
+    category: 'Loop Boundary',
+    fileName: 'solution.cpp',
+    code: `// Challenge: Countdown Timer in C++
+// Beware of missing loop counter update!
+
+#include <iostream>
+
+void countdown(int start) {
+    int count = start;
+    while (count > 0) {
+        std::cout << "T-minus " << count << std::endl;
+        // Forgot to decrement count!
+    }
+}
+
+int main() {
+    countdown(3);
+    return 0;
+}
+`,
+  },
 ];
 
 export const App: React.FC = () => {
   const { mode, setMode, resolvedTheme } = useTheme();
-  const [selectedPresetId, setSelectedPresetId] = useState<string>('syntax_colon');
+  const [language, setLanguage] = useState<SupportedLanguage>('python');
+  const [selectedPresetId, setSelectedPresetId] = useState<string>('py_syntax_colon');
   const [code, setCode] = useState<string>(BUG_PRESETS[0].code);
   const [runResult, setRunResult] = useState<RunResult | null>(null);
   const [isRunning, setIsRunning] = useState<boolean>(false);
@@ -112,6 +325,22 @@ export const App: React.FC = () => {
   const [showReflectionBox, setShowReflectionBox] = useState<boolean>(false);
   const [reflectionText, setReflectionText] = useState<string>('');
   const [isResolved, setIsResolved] = useState<boolean>(false);
+
+  const currentPreset = BUG_PRESETS.find((p) => p.id === selectedPresetId) || BUG_PRESETS[0];
+
+  const handleLanguageChange = (newLang: SupportedLanguage) => {
+    setLanguage(newLang);
+    const firstMatching = BUG_PRESETS.find((p) => p.language === newLang) || BUG_PRESETS[0];
+    setSelectedPresetId(firstMatching.id);
+    setCode(firstMatching.code);
+    setRunResult(null);
+    setActiveAttempt(null);
+    setUnlockedHints([]);
+    setHighlightedLine(null);
+    setShowReflectionBox(false);
+    setIsResolved(false);
+    setStatusMessage(`Switched to ${newLang.toUpperCase()}. Select a challenge or write code and click Run.`);
+  };
 
   const handleSelectPreset = (presetId: string) => {
     const preset = BUG_PRESETS.find((p) => p.id === presetId);
@@ -137,7 +366,7 @@ export const App: React.FC = () => {
 
     try {
       const result = await executeRun({
-        language: 'python',
+        language,
         code,
       });
       setRunResult(result);
@@ -147,7 +376,7 @@ export const App: React.FC = () => {
       if (hasError) {
         setStatusMessage('Bug encountered. Diagnostic model active.');
         const attempt = await createAttempt({
-          language: 'python',
+          language,
           source: 'web',
           code,
           error_text: result.stderr || 'Execution failed',
@@ -173,7 +402,7 @@ export const App: React.FC = () => {
     } finally {
       setIsRunning(false);
     }
-  }, [code, isRunning, activeAttempt, isResolved]);
+  }, [code, isRunning, activeAttempt, isResolved, language]);
 
   const handleGetNextHint = useCallback(async () => {
     if (!activeAttempt || isLoadingHint) return;
@@ -244,8 +473,13 @@ export const App: React.FC = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', width: '100vw', overflow: 'hidden' }}>
-      {/* Top Modern Header */}
-      <Header themeMode={mode} onThemeChange={setMode} />
+      {/* Top Modern Header with Interactive Multi-Language & Theme controls */}
+      <Header
+        themeMode={mode}
+        onThemeChange={setMode}
+        language={language}
+        onLanguageChange={handleLanguageChange}
+      />
 
       {/* Main Workspace (60/40 Split) */}
       <main
@@ -274,6 +508,8 @@ export const App: React.FC = () => {
               code={code}
               onChange={setCode}
               resolvedTheme={resolvedTheme}
+              language={language}
+              fileName={currentPreset.fileName}
               onRunShortcut={handleRun}
               isRunning={isRunning}
               highlightedLine={highlightedLine}
@@ -358,7 +594,7 @@ export const App: React.FC = () => {
                 <RotateCcw size={15} />
               </button>
 
-              {/* Practice Challenge Quick-Loader */}
+              {/* Practice Challenge Quick-Loader (Language Aware) */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: 'var(--space-2)' }}>
                 <BookOpen size={14} color="var(--color-accent)" />
                 <select
@@ -376,7 +612,7 @@ export const App: React.FC = () => {
                     cursor: 'pointer',
                   }}
                 >
-                  {BUG_PRESETS.map((preset) => (
+                  {BUG_PRESETS.filter((p) => p.language === language).map((preset) => (
                     <option key={preset.id} value={preset.id}>
                       {preset.name}
                     </option>
